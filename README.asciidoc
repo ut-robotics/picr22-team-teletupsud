@@ -19,7 +19,7 @@ Sunday: teams are formed. Randomly we picked up previous years teams "TLO Rock" 
 
 === Week 2 +
 *05.09.2022* +
-Everybody goes through the safety briefing, so we know how to operate in the lab safely.
+Everybody goes through the safety briefing, so we know how to operate in the lab safely. +
 *08.09.2022* +
 Programmers start setting up the computer. Because our computer is different from others, It uses mini HDMI for display out. The problem is that the lab has only one mini HDMI -> HDMI cable, and somebody also uses it. Another problem was that in the beginning, we decided not to do a fresh install of Ubuntu on the computer. But it started showing random memory errors, and we decided to reinstall it. That fixed our problem. +
 Kaur and Kaarel decided to set up the test robot of the previous year's team. They ran into trouble when they connected everything up. Found that one of the ground wires was poorly soldered, they re-soldered it. +
