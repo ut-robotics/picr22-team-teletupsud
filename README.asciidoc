@@ -29,9 +29,13 @@ Kaarel started taking dimensions of the robot's body to create the throwing mech
 *12.09.2022* + 
 Started testing and programming. Trying to find the ball with the camera. Also trying to figure out the driving logic. +
 Started with PCB-s schematic design. +
+
 *15.09.2022* +
-Completed all necessary wires and connector to connect the battery to the switch and to the robot itselt.
- 
+Completed all necessary wires and connector to connect the battery to the switch and to the robot itselt. +
+Still designing the thrower mechanism and trying to have all the measurements right. +
+
+*Week 4* +
+
  
 
 
