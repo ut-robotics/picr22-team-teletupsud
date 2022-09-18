@@ -34,7 +34,7 @@ Started with PCB-s schematic design. +
 Completed all necessary wires and connector to connect the battery to the switch and to the robot itselt. +
 Still designing the thrower mechanism and trying to get all the measurements right. (Kaarel, 1,5h) +
 
-*18.09.2022*
+*18.09.2022* +
 Finished designing the thrower mechanism and uploaded it for review. (Kaarel, 3h) +
 
 === Week 4 + 
