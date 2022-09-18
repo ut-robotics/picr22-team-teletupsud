@@ -11,13 +11,13 @@
 Github: https://github.com/ut-robotics/picr22-team-teletupsud +
 
 == Blog
-*Week 1* +
+=== Week 1 +
 *Bootcamp - 03.04.2022 - 04.04.2022* +
 On Saturday, everybody learned the basics of PICR. That includes programming, mechanics and electronics. That includes soldering wires to the mainboard. Also, 3D designed a small motor holder so that you could connect the motor to the robot's body. Installing Ubuntu on the robot's computer and starting programming. +
 Sunday: teams are formed. Randomly we picked up previous years teams "TLO Rock" box number 1. +
 
 
-*Week 2* +
+=== Week 2 +
 *05.09.2022* +
 Everybody goes through the safety briefing, so we know how to operate in the lab safely.
 *08.09.2022* +
@@ -25,17 +25,19 @@ Programmers start setting up the computer. Because our computer is different fro
 Kaur and Kaarel decided to set up the test robot of the previous year's team. They ran into trouble when they connected everything up. Found that one of the ground wires was poorly soldered, they re-soldered it. +
 Kaarel started taking dimensions of the robot's body to create the throwing mechanism.
 
-*Week 3* + 
+=== Week 3 + 
 *12.09.2022* + 
 Started testing and programming. Trying to find the ball with the camera. Also trying to figure out the driving logic. +
 Started with PCB-s schematic design. +
 
 *15.09.2022* +
 Completed all necessary wires and connector to connect the battery to the switch and to the robot itselt. +
-Still designing the thrower mechanism and trying to have all the measurements right. +
+Still designing the thrower mechanism and trying to get all the measurements right. (Kaarel, 1,5h) +
 
-*Week 4* +
+*18.09.2022*
+Finished designing the thrower mechanism and uploaded it for review. (Kaarel, 3h) +
 
+=== Week 4 + 
  
 
 
