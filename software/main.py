@@ -21,6 +21,10 @@ def main_loop():
     motion_sim.open()
     motion_sim2.open()
 
+    robot = motion.OmniMotionRobot()
+    serial_port = "/dev/ttyACM0"
+    robot.open(serial_port)
+
     start = time.time()
     fps = 0
     frame = 0
@@ -29,11 +33,22 @@ def main_loop():
         while True:
             # has argument aligned_depth that enables depth frame to color frame alignment. Costs performance
             processedData = processor.process_frame(aligned_depth=False)
-            print(processedData.balls[0])
-
-            # This is where you add the driving behaviour of your robot. It should be able to filter out
-            # objects of interest and calculate the required motion for reaching the objects
-
+            
+            if not processedData.balls:
+                continue
+            x = processedData.balls[0].x
+            y = processedData.balls[0].y
+            x_speed,y_speed,rot_speed = 0, 0,0
+            if x< 424 or x>464:
+                if x<404:
+                    rot_speed = -4
+                else: rot_speed = 4
+            if y<320:
+                y_speed = 10
+            print(processedData.balls[0],rot_speed)
+            motion_sim.move(x_speed,y_speed,rot_speed)
+            motion_sim2.move(x_speed,y_speed,rot_speed)
+            robot.move(x_speed,y_speed,rot_speed)
             frame_cnt +=1
 
             frame += 1

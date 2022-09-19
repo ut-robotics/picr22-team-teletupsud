@@ -9,7 +9,7 @@ disable_failsafe = 0
 speed1 = 100
 speed2 = 100
 speed3 = 100
-thrower_speed = 0
+thrower_speed = 10
 
 baidid = struct.pack('<hhhHBH', speed1, speed2, speed3, thrower_speed, disable_failsafe, 0xAAAA)
 #ser.write(baidid)

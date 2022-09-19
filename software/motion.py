@@ -4,6 +4,7 @@ import numpy as np
 import time
 import tkinter as tk
 import serial
+import struct
 
 class IRobotMotion:
     def open(self):
@@ -14,6 +15,8 @@ class IRobotMotion:
         pass
 
 class OmniMotionRobot(IRobotMotion):
+    #//////////////////////// LIIGUTA SIIA MOVE ALT
+    serial_port = "/dev/ttyACM0"
 
     def __init__(self):
         self.serialObj = serial.Serial()
@@ -21,6 +24,21 @@ class OmniMotionRobot(IRobotMotion):
     def open(self, serial_port):
         self.serialObj.port = serial_port
         self.serialObj.open()
+
+    def move(self, x_speed, y_speed, rot_speed):#////////////////////////
+        speeds = [0, 0, 0]
+        x_speed, y_speed, rot_speed = 0, 20, 0
+        robotSpeed = math.sqrt(x_speed * x_speed + y_speed * y_speed)
+        robotDirectionAngle = math.atan2(y_speed, x_speed)
+        print(robotDirectionAngle)
+        wheelSpeedToMainboardUnits = 90.9
+        wheelLinearVelocities = []
+        for angle in [0,120,240]:
+            wheelLinearVelocities.append(int(robotSpeed * math.cos(robotDirectionAngle - angle*math.pi/180) + 0.2 * rot_speed))
+        
+        wheelAngularSpeedMainboardUnits = [wheelLinearVelocity * wheelSpeedToMainboardUnits for wheelLinearVelocity in wheelLinearVelocities] 
+        baidid = struct.pack('<hhhHBH',0,0,0,0,0,0xAAAA)
+        self.serialObj.write(baidid)
 
     def close(self):
         self.serialObj.close()
@@ -49,6 +67,8 @@ class TurtleRobot(IRobotMotion):
 
     #Very dumb logic to draw motion using turtle
     def move(self, x_speed, y_speed, rot_speed):
+
+                
         self.screen.tracer(0, 0)
         angle_deg = 0
 
@@ -77,38 +97,23 @@ class TurtleOmniRobot(TurtleRobot):
         TurtleRobot.__init__(self, name)
 
         # Wheel angles
-        self.motor_config = [30, 150, 270]
+        self.motor_config = [0, 120, 240]
 
-    def move(self, x_speed, y_speed, rot_speed):
+    def move(self, x_speed, y_speed, rot_speed):#////////////////////////
         speeds = [0, 0, 0]
-
-        # This is where you need to calculate the speeds for robot motors
-        //
-
-
-
-
+        x_speed, y_speed, rot_speed = 0, 20, 0
+        robotSpeed = math.sqrt(x_speed * x_speed + y_speed * y_speed)
+        robotDirectionAngle = math.atan2(y_speed, x_speed)
+        print(robotDirectionAngle)
+        wheelSpeedToMainboardUnits = 90.9
+        wheelLinearVelocities = []
+        for angle in self.motor_config:
+            wheelLinearVelocities.append(int(robotSpeed * math.cos(robotDirectionAngle - angle*math.pi/180) + 0.2 * rot_speed))
         
-
-        wheelLinearVelocity = robotSpeed * cos(robotDirectionAngle - wheelAngle) + wheelDistanceFromCenter * robotAngularVelocity
-
-        simulated_speeds = self.speeds_to_direction(speeds)
-        robotSpeed = sqrt(robotSpeedX * robotSpeedX + robotSpeedY * robotSpeedY)
-
-        robotDirectionAngle = atan2(robotSpeedY, robotSpeedX)
-
-        wheelAngularSpeedMainboardUnits = (wheelAngularVelocity / (2 * PI())) * encoderCountsPerWheelRevolution * pidControlPeriod
-        wheelAngularVelocity = wheelLinearVelocity / wheelRadius
-
-        encoderCountsPerWheelRevolution = gearboxReductionRatio * encoderEdgesPerMotorRevolution
-
-        pidControlPeriod = 1 / pidControlFrequency
-        
+        wheelAngularSpeedMainboardUnits = [wheelLinearVelocity * wheelSpeedToMainboardUnits for wheelLinearVelocity in wheelLinearVelocities] 
 
 
-
-
-        TurtleRobot.move(self, simulated_speeds[0], simulated_speeds[1], simulated_speeds[2])
+        TurtleRobot.move(self, x_speed, y_speed, rot_speed)
 
     def speeds_to_direction(self, speeds):
         offset_x = 0
