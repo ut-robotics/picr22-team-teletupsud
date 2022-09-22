@@ -38,6 +38,7 @@ Kaarel J is still designing the thrower mechanism and trying to get all the meas
 Kaarel J finished designing the thrower mechanism and uploaded it for review. (3h) +
 
 === Week 4 + 
+ *21.09.2022* +
+ Kaarel J fixed some issues of the thrower mechanism which were pointed our in the review. +
  
-
 
