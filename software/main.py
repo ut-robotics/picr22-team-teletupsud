@@ -23,7 +23,7 @@ def main_loop():
 
     robot = motion.OmniMotionRobot()
     serial_port = "/dev/ttyACM0"
-    #robot.open(serial_port)
+    robot.open(serial_port)
 
     start = time.time()
     fps = 0
@@ -41,12 +41,14 @@ def main_loop():
                 k = cv2.waitKey(1) & 0xff
                 if k == ord('q'):
                     break
-            #Kas pall on vaskul voi paremal?
+
             if not processedData.balls:
                 continue
             x = processedData.balls[0].x
             y = processedData.balls[0].y
-            x_speed,y_speed,rot_speed = 0, 0,0
+            x_speed,y_speed,rot_speed = 0, 0, 0
+
+            #Kas pall on vaskul voi paremal?
             if x< 424 or x>464:
                 if x<404:
                     rot_speed = -4

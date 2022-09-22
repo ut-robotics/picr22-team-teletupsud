@@ -14,8 +14,6 @@ class IRobotMotion:
 
 class OmniMotionRobot(IRobotMotion):
 
-    serial_port = "/dev/ttyACM0"
-
     def __init__(self):
         self.serialObj = serial.Serial()
 
@@ -34,8 +32,8 @@ class OmniMotionRobot(IRobotMotion):
         wheelAngularSpeedMainboardUnits = [int(wheelLinearVelocity * wheelSpeedToMainboardUnits) for wheelLinearVelocity in wheelLinearVelocities]
 
         print(wheelAngularSpeedMainboardUnits) 
-        baidid = struct.pack('<hhhHBH',0,0,0,0,0,0xAAAA)
-        #self.serialObj.write(baidid)
+        baidid = struct.pack('<hhhHBH',0,20,-20,0,0,0xAAAA) # praegu constant v22rtused
+        self.serialObj.write(baidid)
 
     def close(self):
         self.serialObj.close()
