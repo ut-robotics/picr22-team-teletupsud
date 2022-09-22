@@ -7,8 +7,8 @@ import time
 def main_loop():
     debug = True
     
-    motion_sim = motion.TurtleRobot()
-    motion_sim2 = motion.TurtleOmniRobot()
+    #motion_sim = motion.TurtleRobot()
+    #motion_sim2 = motion.TurtleOmniRobot()
     
     #camera instance for normal web cameras
     #cam = camera.OpenCVCamera(id = 2)
@@ -18,12 +18,12 @@ def main_loop():
     processor = image_processor.ImageProcessor(cam, debug=debug)
 
     processor.start()
-    motion_sim.open()
-    motion_sim2.open()
+    #motion_sim.open()
+    #motion_sim2.open()
 
     robot = motion.OmniMotionRobot()
     serial_port = "/dev/ttyACM0"
-    robot.open(serial_port)
+    #robot.open(serial_port)
 
     start = time.time()
     fps = 0
@@ -33,7 +33,15 @@ def main_loop():
         while True:
             # has argument aligned_depth that enables depth frame to color frame alignment. Costs performance
             processedData = processor.process_frame(aligned_depth=False)
-            
+            if debug:
+                debug_frame = processedData.debug_frame
+
+                cv2.imshow('debug', debug_frame)
+
+                k = cv2.waitKey(1) & 0xff
+                if k == ord('q'):
+                    break
+            #Kas pall on vaskul voi paremal?
             if not processedData.balls:
                 continue
             x = processedData.balls[0].x
@@ -43,11 +51,14 @@ def main_loop():
                 if x<404:
                     rot_speed = -4
                 else: rot_speed = 4
+            #Kui kaugel on pall
             if y<320:
                 y_speed = 10
-            print(processedData.balls[0],rot_speed)
-            motion_sim.move(x_speed,y_speed,rot_speed)
-            motion_sim2.move(x_speed,y_speed,rot_speed)
+
+            #print(processedData.balls[0],rot_speed)
+            #motion_sim.move(x_speed,y_speed,rot_speed)
+            #motion_sim2.move(x_speed,y_speed,rot_speed)
+
             robot.move(x_speed,y_speed,rot_speed)
             frame_cnt +=1
 
@@ -62,20 +73,12 @@ def main_loop():
                 #if (frame_cnt > 1000):
                 #    break
 
-            if debug:
-                debug_frame = processedData.debug_frame
-
-                cv2.imshow('debug', debug_frame)
-
-                k = cv2.waitKey(1) & 0xff
-                if k == ord('q'):
-                    break
     except KeyboardInterrupt:
         print("closing....")
     finally:
         cv2.destroyAllWindows()
         processor.stop()
-        motion_sim.close()
-        motion_sim2.close()
+        #motion_sim.close()
+        #motion_sim2.close()
 
 main_loop()
