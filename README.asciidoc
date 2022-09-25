@@ -42,8 +42,11 @@ Kaarel J finished designing the thrower mechanism and uploaded it for review. (3
 Kaarel J fixed some issues of the thrower mechanism which were pointed out in the review. (1,5h) +
 
 *22.09.2022* +
-Kaur debugged the voltage regulator not working. Issue was with faulty connectors and connections (30min)+
+Kaur debugged the voltage regulator not working. Issue was with faulty connectors and connections (30min) +
 Programmers managed to make the robot move in one diretion. (1.5h)+
 All members passed the introduction to battery managment. +
+
+=== Week  5 +
+
  
 
