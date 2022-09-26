@@ -5,7 +5,7 @@ import cv2
 import time
 
 def main_loop():
-    debug = True
+    debug = True # if set to false wont show camera
     
     #motion_sim = motion.TurtleRobot()
     #motion_sim2 = motion.TurtleOmniRobot()
@@ -13,7 +13,7 @@ def main_loop():
     #camera instance for normal web cameras
     #cam = camera.OpenCVCamera(id = 2)
     # camera instance for realsense cameras
-    cam = camera.RealsenseCamera(exposure = 100)
+    cam = camera.RealsenseCamera(exposure = 100, depth_enabled=False)
     
     processor = image_processor.ImageProcessor(cam, debug=debug)
 
@@ -51,11 +51,11 @@ def main_loop():
             #Kas pall on vaskul voi paremal?
             if x< 424 or x>464:
                 if x<404:
-                    rot_speed = -4
-                else: rot_speed = 4
+                    rot_speed = -0.2
+                else: rot_speed = 0.2
             #Kui kaugel on pall
             if y<320:
-                y_speed = 10
+                y_speed = 0.2
 
             #print(processedData.balls[0],rot_speed)
             #motion_sim.move(x_speed,y_speed,rot_speed)

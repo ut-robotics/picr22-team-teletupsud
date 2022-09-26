@@ -32,7 +32,7 @@ class OmniMotionRobot(IRobotMotion):
         wheelAngularSpeedMainboardUnits = [int(wheelLinearVelocity * wheelSpeedToMainboardUnits) for wheelLinearVelocity in wheelLinearVelocities]
 
         print(wheelAngularSpeedMainboardUnits) 
-        baidid = struct.pack('<hhhHBH',0,20,-20,0,0,0xAAAA) # praegu constant v22rtused
+        baidid = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[1],wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],0,0,0xAAAA) # praegu constant v22rtused
         self.serialObj.write(baidid)
 
     def close(self):
