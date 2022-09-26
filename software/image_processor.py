@@ -143,7 +143,7 @@ class ImageProcessor():
         if self.camera.has_depth_capability():
             return self.camera.get_frames(aligned = aligned_depth)
         else:
-            return self.camera.get_color_frame(), np.zeros((self.camera.rgb_height, self.camera.rgb_width), dtype=np.uint8)
+            return cv2.flip(self.camera.get_color_frame(),0), np.zeros((self.camera.rgb_height, self.camera.rgb_width), dtype=np.uint8)
 
     def process_frame(self, aligned_depth = False) -> ProcessedResults:
         color_frame, depth_frame = self.get_frame_data(aligned_depth = aligned_depth)
