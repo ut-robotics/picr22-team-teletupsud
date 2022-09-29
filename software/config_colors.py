@@ -86,6 +86,8 @@ while(True):
     for color in Color:
         frame[fragmented == int(color)] = color.color
 
+    kernel = np.array([[0,1,0],[1,1,1],[0,1,0]],dtype=np.uint8)
+    frame = cv2.dilate(frame, kernel, iterations=1)
     cv2.imshow('mask', frame)
     
     k = cv2.waitKey(1) & 0xff

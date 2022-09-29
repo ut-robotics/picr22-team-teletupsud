@@ -3,9 +3,11 @@ import camera
 import motion
 import cv2
 import time
+import numpy as np
 
 def main_loop():
-    debug = True # if set to false wont show camera
+    debug = False# if set to false wont show camera
+    pall_paremal = False
     
     #motion_sim = motion.TurtleRobot()
     #motion_sim2 = motion.TurtleOmniRobot()
@@ -43,6 +45,9 @@ def main_loop():
                     break
 
             if not processedData.balls:
+                if pall_paremal:
+                    robot.move(0,0,0.2)
+                else: robot.move(0,0,-0.2)
                 continue
             x = processedData.balls[0].x
             y = processedData.balls[0].y
@@ -51,8 +56,11 @@ def main_loop():
             #Kas pall on vaskul voi paremal?
             if x< 424 or x>464:
                 if x<404:
+                    pall_paremal = False
                     rot_speed = -0.2
-                else: rot_speed = 0.2
+                else: 
+                    pall_paremal = True
+                    rot_speed = 0.2
             #Kui kaugel on pall
             if y<320:
                 y_speed = 0.2
