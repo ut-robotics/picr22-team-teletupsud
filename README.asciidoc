@@ -47,6 +47,9 @@ Programmers managed to make the robot move in one diretion. (1.5h)+
 All members passed the introduction to battery managment. +
 
 === Week  5 +
-
+*28.09.2022* +
+ Kaarel J finished CAM model for milling. +
  
+ *29.09.2022* +
+ Kaarel J made some adjustments for CAM model and milled thrower parts. +
 
