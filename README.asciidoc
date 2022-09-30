@@ -53,4 +53,5 @@ All members passed the introduction to battery managment. +
 *29.09.2022* +
 Kaarel J made some adjustments for CAM model and milled out thrower parts. (2h)
 
-
+*30.09.2022* +
+Kaarel J assembled thrower mechanics and attached to robot. (2h)+
