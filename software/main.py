@@ -46,8 +46,8 @@ def main_loop():
 
             if not processedData.balls:
                 if pall_paremal:
-                    robot.move(0,0,0.2)
-                else: robot.move(0,0,-0.2)
+                    robot.move(0,0,0.4)
+                else: robot.move(0,0,-0.4)
                 continue
             x = processedData.balls[0].x
             y = processedData.balls[0].y
