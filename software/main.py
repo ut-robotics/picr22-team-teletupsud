@@ -7,10 +7,7 @@ import numpy as np
 
 def main_loop():
     debug = False# if set to false wont show camera
-    pall_paremal = False
-    
-    #motion_sim = motion.TurtleRobot()
-    #motion_sim2 = motion.TurtleOmniRobot()
+    ball_to_right = False
     
     #camera instance for normal web cameras
     #cam = camera.OpenCVCamera(id = 2)
@@ -20,17 +17,15 @@ def main_loop():
     processor = image_processor.ImageProcessor(cam, debug=debug)
 
     processor.start()
-    #motion_sim.open()
-    #motion_sim2.open()
 
     robot = motion.OmniMotionRobot()
-    serial_port = "/dev/ttyACM0"
-    robot.open(serial_port)
 
     start = time.time()
     fps = 0
     frame = 0
     frame_cnt = 0
+    cam_width_Right, cam_width_Left = cam.rgb_width / 2 + 20, cam.rgb_width / 2 - 20
+    cam_lower_third = cam.rgb_height/3 * 2
     try:
         while True:
             # has argument aligned_depth that enables depth frame to color frame alignment. Costs performance
@@ -45,7 +40,7 @@ def main_loop():
                     break
 
             if not processedData.balls:
-                if pall_paremal:
+                if ball_to_right:
                     robot.move(0,0,0.4)
                 else: robot.move(0,0,-0.4)
                 continue
@@ -53,21 +48,17 @@ def main_loop():
             y = processedData.balls[0].y
             x_speed,y_speed,rot_speed = 0, 0, 0
 
-            #Kas pall on vaskul voi paremal?
-            if x< 424 or x>464:
-                if x<404:
-                    pall_paremal = False
-                    rot_speed = -0.2
+            #Is the ball on the left or right?
+            if x < cam_width_Left or x > cam_width_Right:
+                if x < cam_width_Left:
+                    ball_to_right = False
+                    rot_speed = (cam_width_Left - x) * -0.2 / 100
                 else: 
-                    pall_paremal = True
-                    rot_speed = 0.2
-            #Kui kaugel on pall
-            if y<320:
-                y_speed = 0.2
-
-            #print(processedData.balls[0],rot_speed)
-            #motion_sim.move(x_speed,y_speed,rot_speed)
-            #motion_sim2.move(x_speed,y_speed,rot_speed)
+                    ball_to_right = True
+                    rot_speed = (cam_width_Right - x) * 0.2 / 100
+            #How far away is the ball
+            if y < cam_lower_third:
+                y_speed = (cam_lower_third - y) * 0.2 / 100
 
             robot.move(x_speed,y_speed,rot_speed)
             frame_cnt +=1
@@ -88,7 +79,5 @@ def main_loop():
     finally:
         cv2.destroyAllWindows()
         processor.stop()
-        #motion_sim.close()
-        #motion_sim2.close()
 
 main_loop()
