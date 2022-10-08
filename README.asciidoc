@@ -58,3 +58,9 @@ Kaarel K and Sander got the robot to find and follow the ball. (2h) +
 *30.09.2022* +
 Kaarel J assembled thrower mechanics and attached to robot. (2h)+
 Kaur basically finished the schematics of the robot(6h) +
+
+=== Week 6 +
+*03.10.2022* +
+Kaarel J started designing omniwheels. (1h) +
+
+
