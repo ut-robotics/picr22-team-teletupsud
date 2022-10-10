@@ -77,7 +77,7 @@ while(True):
     processedData = processor.process_frame()
 
     rgb = processedData.color_frame
-
+    rgb = cv2.flip(rgb,0)
     cv2.imshow('rgb', rgb)
     
     fragmented	= colors_lookup[rgb[:,:,0] + rgb[:,:,1] * 0x100 + rgb[:,:,2] * 0x10000]
