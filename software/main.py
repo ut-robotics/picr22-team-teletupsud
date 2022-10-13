@@ -30,7 +30,7 @@ def main_loop():
     fps = 0
     frame = 0
     frame_cnt = 0
-    cam_width_Right, cam_width_Left = cam.rgb_width / 2 + 30, cam.rgb_width / 2 - 30
+    cam_width_Right, cam_width_Left = cam.rgb_width / 2 + 20, cam.rgb_width / 2 - 20
     cam_lower_third = cam.rgb_height/3 * 2
 
     current_state = State.SEARCH_BALL
@@ -45,6 +45,11 @@ def main_loop():
                 k = cv2.waitKey(1) & 0xff
                 if k == ord('q'):
                     break
+
+            if current_state == State.BALL_CENTERED:
+                robot.throw()
+                current_state = State.SEARCH_BALL
+                continue
             
             if not processedData.balls:
                 current_state = State.SEARCH_BALL

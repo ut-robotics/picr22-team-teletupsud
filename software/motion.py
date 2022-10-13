@@ -4,6 +4,7 @@ import tkinter as tk
 import serial
 import struct
 import serial.tools.list_ports
+import time as time
 
 class IRobotMotion:
     def open(self):
@@ -37,11 +38,23 @@ class OmniMotionRobot(IRobotMotion):
         for angle in [0,120,240]:
             wheelLinearVelocities.append(robotSpeed * math.cos(robotDirectionAngle - angle*math.pi/180) + self.wheel_distance_from_center * rot_speed)
         
-        wheelAngularSpeedMainboardUnits = [int(wheelLinearVelocity * self.wheelSpeedToMainboardUnits) for wheelLinearVelocity in wheelLinearVelocities]
+        wheelAngularSpeedMainboardUnits = []
+        for wheelLinearVelocity in wheelLinearVelocities:
+            wheelLinearVelocity = wheelLinearVelocity * self.wheelSpeedToMainboardUnits
+            if wheelLinearVelocity < 0:
+                wheelAngularSpeedMainboardUnits.append(math.floor(wheelLinearVelocity))
+            else: wheelAngularSpeedMainboardUnits.append(math.ceil(wheelLinearVelocity))
 
         print(wheelAngularSpeedMainboardUnits) #                                                                                   Thrower_speed/Fail safe
         baidid = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[1],wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],0,0,0xAAAA)
         self.serialObj.write(baidid)
+
+    def throw(self):
+        thrower_speed = 500
+        time_1 = time.time()
+        while time.time() - time_1 < 1 :
+            baidid = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
+            self.serialObj.write(baidid)
 
     def close(self):
         self.serialObj.close()
