@@ -63,9 +63,26 @@ Kaur basically finished the schematics of the robot(6h) +
 *03.10.2022* +
 Kaarel J started designing omniwheels. (1h) +
 
+*05.10.2022* +
+Kaur designing the PCB. (2h) +
+
+*06.10.2022* +
+Kaur designing the PCB. (2h)+
+
 
 === Week 7 +
 *13.10.2022* +
 Kaarel J working on omniwheel design. (2h) +
+Kaur designing the PCB. (2h) +
+
+*13.10.2022*+
+Kaur designing the PCB. (2h) +
+
+*16.10.2022*+
+Kaur finished the first version of PCB, sent it to the revision(2h) +
+
+=== Week 8 +
+
+
 
 
