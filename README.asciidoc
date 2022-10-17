@@ -62,18 +62,24 @@ Kaur basically finished the schematics of the robot(6h) +
 === Week 6 +
 *03.10.2022* +
 Kaarel J started designing omniwheels. (1h) +
+Sander and Kaarel K fixed some issues with code based on feedback. (2h) +
 
 *05.10.2022* +
 Kaur designing the PCB. (2h) +
 
 *06.10.2022* +
 Kaur designing the PCB. (2h)+
+Kaarel K and Sander started implementing state logic and fixed some ball tracking issues. (1,5h) +
 
 
 === Week 7 +
+*10.10.2022* +
+Sander and Kaarel K finished implementing states. (1h) +
+
 *13.10.2022* +
 Kaarel J working on omniwheel design. (2h) +
 Kaur designing the PCB. (2h) +
+Kaarel K and Sander improved centering of the ball, tried basic throwing. (2h) +
 
 *14.10.2022*+
 Kaur designing the PCB. (2h) +
