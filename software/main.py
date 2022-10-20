@@ -9,7 +9,8 @@ from enum import Enum
 class State(Enum):
     SEARCH_BALL = 1
     DRIVE_TO_BALL = 2
-    BALL_CENTERED = 3
+    FIND_BASKET = 3
+    THROW_BALL = 4
 
 def main_loop():
     debug = False# if set to false wont show camera
@@ -25,12 +26,14 @@ def main_loop():
     processor.start()
 
     robot = motion.OmniMotionRobot()
+    robot.open()
 
     start = time.time()
     fps = 0
     frame = 0
     frame_cnt = 0
-    cam_width_Right, cam_width_Left = cam.rgb_width / 2 + 20, cam.rgb_width / 2 - 20
+    cam_center = cam.rgb_width / 2
+    center_offset = 20
     cam_lower_third = cam.rgb_height/3 * 2
 
     current_state = State.SEARCH_BALL
@@ -46,10 +49,14 @@ def main_loop():
                 if k == ord('q'):
                     break
 
-            if current_state == State.BALL_CENTERED:
+            if current_state == State.FIND_BASKET:
+                robot.rotate()
+                if (processedData.basket_b.x > cam_center - center_offset) and (processedData.basket_b.x < cam_center + center_offset):
+                    current_state = State.THROW_BALL
+                continue
+            if current_state == State.THROW_BALL:
                 robot.throw()
                 current_state = State.SEARCH_BALL
-                continue
             
             if not processedData.balls:
                 current_state = State.SEARCH_BALL
@@ -68,20 +75,19 @@ def main_loop():
                 x_speed,y_speed,rot_speed = 0, 0, 0
 
                 #Is the ball on the left or right?
-                if x < cam_width_Left or x > cam_width_Right:
+                if abs(x - cam_center) > center_offset:
                     if y > cam_lower_third:
                         Rot_constant = 0.1
                     else: Rot_constant = 0.2
-                    if x < cam_width_Left:
+                    if x < cam_center - center_offset:
                         ball_to_right = False
-                        rot_speed = abs(cam_width_Left - x) * -Rot_constant / 100
-                    elif x>cam_width_Right: 
+                    else: 
                         ball_to_right = True
-                        rot_speed = abs(cam_width_Right - x) * Rot_constant / 100
+                    rot_speed = (cam_center - x) * Rot_constant / 100
                     
                 else:
                     if y > cam_lower_third:
-                        current_state = State.BALL_CENTERED
+                        current_state = State.FIND_BASKET
                         continue
                 #How far away is the ball
                 if y < cam_lower_third:

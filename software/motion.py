@@ -20,15 +20,16 @@ class OmniMotionRobot(IRobotMotion):
         pid = 22336
         for x in serial.tools.list_ports.comports():
             if x.pid == pid:
-                self.serialObj = serial.Serial(x.device)
-            else:
-                self.serialObj = serial.Serial()
+                self.device = x.device
 
-            self.wheel_distance_from_center = 0.2
-            self.wheelSpeedToMainboardUnits = 90.9
+        self.serialObj = serial.Serial()
+
+        self.wheel_distance_from_center = 0.2
+        self.wheelSpeedToMainboardUnits = 90.9
 
     def open(self):
-        pass
+        self.serialObj.port = self.device
+        self.serialObj.open()
 
     def move(self, x_speed, y_speed, rot_speed):#////////////////////////
         robotSpeed = math.sqrt(x_speed * x_speed + y_speed * y_speed)
@@ -36,25 +37,30 @@ class OmniMotionRobot(IRobotMotion):
 
         wheelLinearVelocities = []
         for angle in [0,120,240]:
-            wheelLinearVelocities.append(robotSpeed * math.cos(robotDirectionAngle - angle*math.pi/180) + self.wheel_distance_from_center * rot_speed)
+            wheelLinearVelocities.append(robotSpeed * math.cos(robotDirectionAngle - math.radians(angle)) + self.wheel_distance_from_center * rot_speed)
         
         wheelAngularSpeedMainboardUnits = []
         for wheelLinearVelocity in wheelLinearVelocities:
             wheelLinearVelocity = wheelLinearVelocity * self.wheelSpeedToMainboardUnits
-            if wheelLinearVelocity < 0:
-                wheelAngularSpeedMainboardUnits.append(math.floor(wheelLinearVelocity))
-            else: wheelAngularSpeedMainboardUnits.append(math.ceil(wheelLinearVelocity))
+            if -1 < wheelLinearVelocity < 0:
+                wheelLinearVelocity = -1
+            elif 0 < wheelLinearVelocity < 1: 
+                wheelLinearVelocity = 1
+            wheelAngularSpeedMainboardUnits.append(int(wheelLinearVelocity))
 
         print(wheelAngularSpeedMainboardUnits) #                                                                                   Thrower_speed/Fail safe
-        baidid = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[1],wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],0,0,0xAAAA)
-        self.serialObj.write(baidid)
+        bytes_struct = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[1],wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],0,0,0xAAAA)
+        self.serialObj.write(bytes_struct)
 
     def throw(self):
         thrower_speed = 500
         time_1 = time.time()
         while time.time() - time_1 < 1 :
-            baidid = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
-            self.serialObj.write(baidid)
+            bytes_struct = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
+            self.serialObj.write(bytes_struct)
+    def rotate(self):
+        bytes_struct = struct.pack('<hhhHBH', 0, 10, 0, 0,0,0xAAAA)
+        self.serialObj.write(bytes_struct)
 
     def close(self):
         self.serialObj.close()

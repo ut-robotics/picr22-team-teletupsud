@@ -7,7 +7,7 @@ ser = serial.Serial(serial_port)
 
 disable_failsafe = 0
 speed1 = 0
-speed2 = 0
+speed2 = 10
 speed3 = 0
 thrower_speed = 400
 
@@ -24,7 +24,7 @@ while True:
 print("vsjo")
 #time.sleep(4)
 
-baidid = struct.pack('<hhhHBH', 0, 0, 0, thrower_speed, disable_failsafe, 0xAAAA)
+baidid = struct.pack('<hhhHBH', -10, 10, 10, thrower_speed, disable_failsafe, 0xAAAA)
 ser.write(baidid)
 
 ser.close()
