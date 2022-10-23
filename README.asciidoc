@@ -88,6 +88,8 @@ Kaur designing the PCB. (2h) +
 Kaur finished the first version of PCB, sent it to the revision(2h) +
 
 === Week 8 +
+*23.10.2022*+
+Kaarel J working on omniwheels, minor tweaking and testing another design. (1,5h) +
 
 
 
