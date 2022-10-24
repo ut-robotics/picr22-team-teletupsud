@@ -52,12 +52,9 @@ class OmniMotionRobot(IRobotMotion):
         bytes_struct = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[1],wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],0,0,0xAAAA)
         self.serialObj.write(bytes_struct)
 
-    def throw(self):
-        thrower_speed = 500
-        time_1 = time.time()
-        while time.time() - time_1 < 1 :
-            bytes_struct = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
-            self.serialObj.write(bytes_struct)
+    def throw(self,thrower_speed):
+        bytes_struct = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
+        self.serialObj.write(bytes_struct)
     def rotate(self):
         bytes_struct = struct.pack('<hhhHBH', 0, 10, 0, 0,0,0xAAAA)
         self.serialObj.write(bytes_struct)

@@ -55,8 +55,12 @@ def main_loop():
                     current_state = State.THROW_BALL
                 continue
             if current_state == State.THROW_BALL:
-                robot.throw()
+                thrower_speed = 500
+                time_1 = time.time()
+                while time.time() - time_1 < 1 :
+                    robot.throw(thrower_speed)
                 current_state = State.SEARCH_BALL
+                continue
             
             if not processedData.balls:
                 current_state = State.SEARCH_BALL
