@@ -88,12 +88,24 @@ Kaur designing the PCB. (2h) +
 Kaur finished the first version of PCB, sent it to the revision(2h) +
 
 === Week 8 +
+*17.10.2022*+
+Sander and Kaarel K tried a remote desktop solution, rotating around the ball (1h)+
+
+*20.10.2022*
+Sander and Kaarel K made a setup so we can run the code on our own laptop, fixed issues from pull request. (1,5h) +
+
 *23.10.2022*+
 Kaarel J working on omniwheels, minor tweaking and testing another design. (1,5h) +
 
 === Week 9 +
+*24.10.2022*+
+Sander and Kaarel K: basket thresholding, moved throwing logic, masked the motor in the camera view (2h) +
+
 *26.10*2022* +
 Kaarel J finished motormount design. (2,5h) +
+
+*27.10.2022*+
+Kaarel K and Sander: corrections while orbiting the ball, lining up with the basket and throwing (2h) +
 
 === Week 10 +
 
