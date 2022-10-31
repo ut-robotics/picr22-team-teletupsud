@@ -92,8 +92,8 @@ Kaur finished the first version of PCB, sent it to the revision(2h) +
 Kaarel J working on omniwheels, minor tweaking and testing another design. (1,5h) +
 
 === Week 9 +
-*26.10*2022*+
-Kaarel J finished motormount design. (2,5h)
+*26.10*2022* +
+Kaarel J finished motormount design. (2,5h) +
 
 === Week 10 +
 
