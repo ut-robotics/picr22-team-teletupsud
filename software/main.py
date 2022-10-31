@@ -34,11 +34,12 @@ def main_loop():
     frame_cnt = 0
     cam_center = cam.rgb_width / 2
     center_offset = 20
-    cam_lower_third = cam.rgb_height/3 * 2
+    cam_lower_third = cam.rgb_height/3 * 2 + 20
 
     current_state = State.SEARCH_BALL
     try:
         while True:
+            print(current_state,ball_to_right)
             processedData = processor.process_frame(aligned_depth=False)
             if debug:
                 debug_frame = processedData.debug_frame
@@ -53,14 +54,24 @@ def main_loop():
                 robot.rotate()
                 if (processedData.basket_b.x > cam_center - center_offset) and (processedData.basket_b.x < cam_center + center_offset):
                     current_state = State.THROW_BALL
+                    continue
+                elif time.time() - time_1 >= 2: 
+                    current_state = State.DRIVE_TO_BALL
+                    continue
                 continue
             if current_state == State.THROW_BALL:
-                thrower_speed = 500
-                time_1 = time.time()
-                while time.time() - time_1 < 1 :
-                    robot.throw(thrower_speed)
-                current_state = State.SEARCH_BALL
-                continue
+                x = processedData.balls[0].x
+                if abs(x - cam_center) > center_offset:
+                    current_state = State.DRIVE_TO_BALL
+                    continue
+                else:
+                    thrower_speed = 1000
+                    time_1 = time.time()
+                    while time.time() - time_1 < 1 :
+                        robot.throw(thrower_speed)
+                    current_state = State.SEARCH_BALL
+                    continue
+                 
             
             if not processedData.balls:
                 current_state = State.SEARCH_BALL
@@ -80,18 +91,21 @@ def main_loop():
 
                 #Is the ball on the left or right?
                 if abs(x - cam_center) > center_offset:
+                    print(f"koordinaat : {x}")
                     if y > cam_lower_third:
                         Rot_constant = 0.1
                     else: Rot_constant = 0.2
                     if x < cam_center - center_offset:
-                        ball_to_right = False
-                    else: 
                         ball_to_right = True
-                    rot_speed = (cam_center - x) * Rot_constant / 100
+                    else: 
+                        ball_to_right = False
+                    rot_speed = (
+                        cam_center - x) * Rot_constant / 100
                     
                 else:
                     if y > cam_lower_third:
                         current_state = State.FIND_BASKET
+                        time_1 = time.time()
                         continue
                 #How far away is the ball
                 if y < cam_lower_third:
