@@ -100,6 +100,7 @@ Kaarel J working on omniwheels, minor tweaking and testing another design. (1,5h
 === Week 9 +
 *24.10.2022*+
 Sander and Kaarel K: basket thresholding, moved throwing logic, masked the motor in the camera view (2h) +
+Kaur fixed some PCB desing bugs (2h) +
 
 *26.10*2022* +
 Kaarel J finished motormount design. (2,5h) +
@@ -108,7 +109,11 @@ Kaarel J finished motormount design. (2,5h) +
 Kaarel K and Sander: corrections while orbiting the ball, lining up with the basket and throwing (2h) +
 
 === Week 10 +
+*31.10.2022*+
+Kaur moved from CircuitMaker to Altium Designer and re-designed the PCB there(8h)+
 
+*01.11.2022*+
+Kaur finished the current PCB design and sent it to revision(4h)+
 
 
 
