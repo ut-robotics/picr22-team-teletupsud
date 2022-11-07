@@ -138,18 +138,19 @@ class ImageProcessor():
                 cv2.circle(self.debug_frame,(basket.x, basket.y), 20, debug_color, -1)
 
         return basket
-
+    
     def get_frame_data(self, aligned_depth = False):
         
         if self.camera.has_depth_capability():
-            return self.camera.get_frames(aligned = aligned_depth)
+            color_frame, depth_frame = self.camera.get_frames(aligned = aligned_depth)
+            return cv2.flip(cv2.flip(color_frame,0),1), cv2.flip(cv2.flip(depth_frame,0),1)
         else:
 
             return cv2.flip(cv2.flip(self.camera.get_color_frame(),0),1), np.zeros((self.camera.rgb_height, self.camera.rgb_width), dtype=np.uint8)
 
     def process_frame(self, aligned_depth = False) -> ProcessedResults:
         color_frame, depth_frame = self.get_frame_data(aligned_depth = aligned_depth)
-        color_frame = cv2.rectangle(color_frame,(400,420),(450,480),(125,125,255),-1)
+        color_frame = cv2.rectangle(color_frame,(390,420),(450,480),(125,125,255),-1)
         kernel = np.array([[0,1,0],[1,1,1],[0,1,0]],dtype=np.uint8)
         color_frame = cv2.dilate(color_frame, kernel, iterations=1)
         segment.segment(color_frame, self.fragmented, self.t_balls, self.t_basket_m, self.t_basket_b)

@@ -56,7 +56,7 @@ class OmniMotionRobot(IRobotMotion):
         bytes_struct = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
         self.serialObj.write(bytes_struct)
     def rotate(self):
-        bytes_struct = struct.pack('<hhhHBH', 0, 10, 0, 0,0,0xAAAA)
+        bytes_struct = struct.pack('<hhhHBH', 0, 20, 0, 0,0,0xAAAA)
         self.serialObj.write(bytes_struct)
 
     def close(self):

@@ -13,7 +13,7 @@ class State(Enum):
     THROW_BALL = 4
 
 def main_loop():
-    debug = False# if set to false wont show camera
+    debug = True# if set to false wont show camera
     ball_to_right = False
     
     #camera instance for normal web cameras
@@ -60,7 +60,10 @@ def main_loop():
                     continue
                 continue
             if current_state == State.THROW_BALL:
+                basket_distance = processedData.basket_b.distance
+                print(basket_distance)
                 x = processedData.balls[0].x
+                #check if ball is in center
                 if abs(x - cam_center) > center_offset:
                     current_state = State.DRIVE_TO_BALL
                     continue
@@ -80,9 +83,13 @@ def main_loop():
 
 
             if current_state == State.SEARCH_BALL:
-                if ball_to_right:
-                    robot.move(0,0,0.4)
-                else: robot.move(0,0,-0.4)
+                time_search = time.time()
+                while time.time() - time_search <= 0.2:
+                    if ball_to_right:
+                        robot.move(0,0,0.6)
+                    else:
+                        robot.move(0,0,-0.6)
+                time.sleep(0.1)
             
             elif current_state == State.DRIVE_TO_BALL:
                 x = processedData.balls[0].x
