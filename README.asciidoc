@@ -106,15 +106,18 @@ Kaur fixed some PCB desing bugs (2h) +
 *26.10*2022* +
 Kaarel J finished motormount design. (2,5h) +
 
-*27.10.2022*+
+*27.10.2022* +
 Kaarel K and Sander: corrections while orbiting the ball, lining up with the basket and throwing (2h) +
 
 === Week 10 +
-*31.10.2022*+
+*31.10.2022* +
 Kaur moved from CircuitMaker to Altium Designer and re-designed the PCB there(8h)+
 
-*01.11.2022*+
+*01.11.2022* +
 Kaur finished the current PCB design and sent it to revision(4h)+
+
+*03.11.2022* +
+Kaarel made aluminium connectors for wheels (3h) +
 
 
 
