@@ -1,3 +1,4 @@
+#import PYTHONPATH=${PYTHONPATH}:${HOME}/foo #meie path /home/robot/.local/lib/python3.9/site-packages/
 import image_processor
 import camera
 import motion
@@ -7,19 +8,29 @@ import numpy as np
 from enum import Enum
 
 class State(Enum):
+    TESTING = 0
     SEARCH_BALL = 1
     DRIVE_TO_BALL = 2
     FIND_BASKET = 3
     THROW_BALL = 4
+def translate(value, leftMin, leftMax, rightMin, rightMax):
+    # Figure out how 'wide' each range is
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
 
+    # Convert the left range into a 0-1 range (float)
+    valueScaled = float(value - leftMin) / float(leftSpan)
+
+    # Convert the 0-1 range into a value in the right range.
+    return rightMin + (valueScaled * rightSpan)
 def main_loop():
-    debug = True# if set to false wont show camera
+    debug = False# if set to false wont show camera
     ball_to_right = False
     
     #camera instance for normal web cameras
     #cam = camera.OpenCVCamera(id = 2)
     # camera instance for realsense cameras
-    cam = camera.RealsenseCamera(exposure = 100, depth_enabled=False)
+    cam = camera.RealsenseCamera(exposure = 100, depth_enabled=True)
     
     processor = image_processor.ImageProcessor(cam, debug=debug)
 
@@ -34,13 +45,13 @@ def main_loop():
     frame_cnt = 0
     cam_center = cam.rgb_width / 2
     center_offset = 20
+    basket_offset = 8
     cam_lower_third = cam.rgb_height/3 * 2 + 20
 
     current_state = State.SEARCH_BALL
     try:
         while True:
-            print(current_state,ball_to_right)
-            processedData = processor.process_frame(aligned_depth=False)
+            processedData = processor.process_frame(aligned_depth=True)
             if debug:
                 debug_frame = processedData.debug_frame
 
@@ -49,26 +60,68 @@ def main_loop():
                 k = cv2.waitKey(1) & 0xff
                 if k == ord('q'):
                     break
+            print(current_state,ball_to_right,processedData.basket_b.x)
+            if current_state == State.TESTING:
+                if processedData.basket_b.x:
+                    if abs(processedData.basket_b.x-cam_center)>basket_offset:
+                        if processedData.basket_b.x <= cam_center - basket_offset:
+                            robot.rotate(7)
+                        elif processedData.basket_b.x >= cam_center + basket_offset:
+                            robot.rotate(-7)
+                        time.sleep(0.1)
 
+                       
+                    else:
+                        print("tere")
+                        thrower_speed = input("Sisesta thrower speed")
+                        thrower_speed = int(thrower_speed)
+                        time_x = time.time()
+                        basket_x = processedData.basket_b.x
+                        #print(basket_x)
+                        while time.time() - time_x <= 0.3:
+                            robot.throw(thrower_speed)
+                        basket_distance = processedData.basket_b.distance
+                        print(basket_distance,thrower_speed)
+                continue
             if current_state == State.FIND_BASKET:
-                robot.rotate()
-                if (processedData.basket_b.x > cam_center - center_offset) and (processedData.basket_b.x < cam_center + center_offset):
+                if (processedData.basket_b.x >= cam_center - basket_offset) and (processedData.basket_b.x <= cam_center + basket_offset):
                     current_state = State.THROW_BALL
+                    #getting rid of motion blur
+                    time.sleep(0.1)
                     continue
-                elif time.time() - time_1 >= 2: 
+                # we check if ball is in middle every 0.5 sec
+                elif time.time() - time_1 >= 0.5: 
                     current_state = State.DRIVE_TO_BALL
                     continue
+                elif processedData.basket_b.x:
+                    rotation_speed = translate(processedData.basket_b.x, 0, cam.rgb_width, -30, 30)
+                    rotation_speed = -rotation_speed
+                    if 1>abs(rotation_speed)>=0:
+                        if rotation_speed <= 0:
+                            rotation_speed = -2
+                        if rotation_speed > 0:
+                            rotation_speed = 2
+                    rotation_speed = int(rotation_speed)
+                    robot.rotate(rotation_speed)
+                elif not processedData.basket_b.x:
+                    time_rotate = time.time()
+                    while time.time() - time_rotate < 0.1:
+                        robot.rotate(20)
+                    time.sleep(0.05)
                 continue
+
+            #kui korv on paremal või vasakul ta viskab mööda, alati
             if current_state == State.THROW_BALL:
-                basket_distance = processedData.basket_b.distance
-                print(basket_distance)
                 x = processedData.balls[0].x
                 #check if ball is in center
                 if abs(x - cam_center) > center_offset:
                     current_state = State.DRIVE_TO_BALL
                     continue
                 else:
-                    thrower_speed = 1000
+                    basket_distance = processedData.basket_b.distance
+                    basket_distance = basket_distance * 0.195 + 380
+                    print(basket_distance,processedData.basket_b.x)
+                    thrower_speed = int(basket_distance)
                     time_1 = time.time()
                     while time.time() - time_1 < 1 :
                         robot.throw(thrower_speed)
@@ -84,12 +137,12 @@ def main_loop():
 
             if current_state == State.SEARCH_BALL:
                 time_search = time.time()
-                while time.time() - time_search <= 0.2:
+                while time.time() - time_search <= 0.1:
                     if ball_to_right:
                         robot.move(0,0,0.6)
                     else:
                         robot.move(0,0,-0.6)
-                time.sleep(0.1)
+                time.sleep(0.2)
             
             elif current_state == State.DRIVE_TO_BALL:
                 x = processedData.balls[0].x
@@ -98,7 +151,7 @@ def main_loop():
 
                 #Is the ball on the left or right?
                 if abs(x - cam_center) > center_offset:
-                    print(f"koordinaat : {x}")
+                    #print(f"koordinaat : {x}")
                     if y > cam_lower_third:
                         Rot_constant = 0.1
                     else: Rot_constant = 0.2
@@ -106,8 +159,7 @@ def main_loop():
                         ball_to_right = True
                     else: 
                         ball_to_right = False
-                    rot_speed = (
-                        cam_center - x) * Rot_constant / 100
+                    rot_speed = (cam_center - x) * Rot_constant / 100
                     
                 else:
                     if y > cam_lower_third:
@@ -127,8 +179,8 @@ def main_loop():
                 end = time.time()
                 fps = 30 / (end - start)
                 start = end
-                print("FPS: {}, framecount: {}".format(fps, frame_cnt))
-                print("ball_count: {}".format(len(processedData.balls)))
+                #print("FPS: {}, framecount: {}".format(fps, frame_cnt))
+                #print("ball_count: {}".format(len(processedData.balls)))
                 #if (frame_cnt > 1000):
                 #    break
 

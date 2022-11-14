@@ -108,7 +108,7 @@ class ImageProcessor():
 
         return balls
 
-    def analyze_baskets(self, t_basket, debug_color = (0, 255, 255)) -> list:
+    def analyze_baskets(self, t_basket, depth, debug_color = (0, 255, 255)) -> list:
         contours, hierarchy = cv2.findContours(t_basket, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         baskets = []
@@ -125,7 +125,7 @@ class ImageProcessor():
 
             obj_x = int(x + (w/2))
             obj_y = int(y + (h/2))
-            obj_dst = obj_y
+            obj_dst = np.average(depth[obj_y-1:obj_y+1,obj_x-1:obj_x+1])
 
             baskets.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
 
@@ -138,7 +138,9 @@ class ImageProcessor():
                 cv2.circle(self.debug_frame,(basket.x, basket.y), 20, debug_color, -1)
 
         return basket
-    
+    def get_depth(self,x,y,depth_frame):
+        return depth_frame[y][x]
+        
     def get_frame_data(self, aligned_depth = False):
         
         if self.camera.has_depth_capability():
@@ -159,8 +161,8 @@ class ImageProcessor():
             self.debug_frame = np.copy(color_frame)
         
         balls = self.analyze_balls(self.t_balls, self.fragmented)
-        basket_b = self.analyze_baskets(self.t_basket_b, debug_color=c.Color.BLUE.color.tolist())
-        basket_m = self.analyze_baskets(self.t_basket_m, debug_color=c.Color.MAGENTA.color.tolist())
+        basket_b = self.analyze_baskets(self.t_basket_b,depth_frame, debug_color=c.Color.BLUE.color.tolist())
+        basket_m = self.analyze_baskets(self.t_basket_m,depth_frame, debug_color=c.Color.MAGENTA.color.tolist())
 
         return ProcessedResults(balls = balls, 
                                 basket_b = basket_b, 

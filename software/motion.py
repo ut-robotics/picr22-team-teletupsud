@@ -29,6 +29,7 @@ class OmniMotionRobot(IRobotMotion):
 
     def open(self):
         self.serialObj.port = self.device
+        #self.serialObj.port = "/dev/ttyS0"
         self.serialObj.open()
 
     def move(self, x_speed, y_speed, rot_speed):#////////////////////////
@@ -55,8 +56,8 @@ class OmniMotionRobot(IRobotMotion):
     def throw(self,thrower_speed):
         bytes_struct = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
         self.serialObj.write(bytes_struct)
-    def rotate(self):
-        bytes_struct = struct.pack('<hhhHBH', 0, 20, 0, 0,0,0xAAAA)
+    def rotate(self,rotate_speed):
+        bytes_struct = struct.pack('<hhhHBH', 0, rotate_speed, 0, 0,0,0xAAAA)
         self.serialObj.write(bytes_struct)
 
     def close(self):
