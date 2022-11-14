@@ -84,28 +84,32 @@ def main_loop():
                         print(basket_distance,thrower_speed)
                 continue
             if current_state == State.FIND_BASKET:
+
                 if (processedData.basket_b.x >= cam_center - basket_offset) and (processedData.basket_b.x <= cam_center + basket_offset):
                     current_state = State.THROW_BALL
                     #getting rid of motion blur
                     time.sleep(0.1)
                     continue
                 # we check if ball is in middle every 0.5 sec
+                
                 elif time.time() - time_1 >= 0.5: 
                     current_state = State.DRIVE_TO_BALL
                     continue
-                elif processedData.basket_b.x:
+
+                elif processedData.basket_b is not None:
                     rotation_speed = translate(processedData.basket_b.x, 0, cam.rgb_width, -30, 30)
                     rotation_speed = -rotation_speed
                     if 1>abs(rotation_speed)>=0:
                         if rotation_speed <= 0:
-                            rotation_speed = -2
+                            rotation_speed = -1
                         if rotation_speed > 0:
-                            rotation_speed = 2
+                            rotation_speed = 1
                     rotation_speed = int(rotation_speed)
                     robot.rotate(rotation_speed)
-                elif not processedData.basket_b.x:
+                
+                elif processedData.basket_b is None:
                     time_rotate = time.time()
-                    while time.time() - time_rotate < 0.1:
+                    while time.time() - time_rotate < 1:
                         robot.rotate(20)
                     time.sleep(0.05)
                 continue
@@ -137,12 +141,12 @@ def main_loop():
 
             if current_state == State.SEARCH_BALL:
                 time_search = time.time()
-                while time.time() - time_search <= 0.1:
+                while time.time() - time_search <= 1:
                     if ball_to_right:
                         robot.move(0,0,0.6)
                     else:
                         robot.move(0,0,-0.6)
-                time.sleep(0.2)
+                time.sleep(1)
             
             elif current_state == State.DRIVE_TO_BALL:
                 x = processedData.balls[0].x
