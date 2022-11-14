@@ -45,7 +45,7 @@ Kaarel J fixed some issues of the thrower mechanism which were pointed out in th
 
 *22.09.2022* +
 Kaur debugged the voltage regulator not working. Issue was with faulty connectors and connections (30min) +
-Programmers managed to make the robot move in one diretion. (1.5h)+
+Programmers managed to make the robot move in one diretion. (1.5h) +
 All members passed the introduction to battery managment. +
 
 === Week  5 +
@@ -69,7 +69,7 @@ Sander and Kaarel K fixed some issues with code based on feedback. (2h) +
 Kaur designing the PCB. (2h) +
 
 *06.10.2022* +
-Kaur designing the PCB. (2h)+
+Kaur designing the PCB. (2h) +
 Kaarel K and Sander started implementing state logic and fixed some ball tracking issues. (1,5h) +
 
 
@@ -82,24 +82,24 @@ Kaarel J working on omniwheel design. (2h) +
 Kaur designing the PCB. (2h) +
 Kaarel K and Sander improved centering of the ball, tried basic throwing. (2h) +
 
-*14.10.2022*+
+*14.10.2022* +
 Kaur designing the PCB. (2h) +
 
-*16.10.2022*+
+*16.10.2022* +
 Kaur finished the first version of PCB, sent it to the revision(2h) +
 
 === Week 8 +
-*17.10.2022*+
-Sander and Kaarel K tried a remote desktop solution, rotating around the ball (1h)+
+*17.10.2022* +
+Sander and Kaarel K tried a remote desktop solution, rotating around the ball (1h) +
 
-*20.10.2022*
+*20.10.2022* +
 Sander and Kaarel K made a setup so we can run the code on our own laptop, fixed issues from pull request. (1,5h) +
 
-*23.10.2022*+
+*23.10.2022* +
 Kaarel J working on omniwheels, minor tweaking and testing another design. (1,5h) +
 
 === Week 9 +
-*24.10.2022*+
+*24.10.2022* +
 Sander and Kaarel K: basket thresholding, moved throwing logic, masked the motor in the camera view (2h) +
 Kaur fixed some PCB desing bugs (2h) +
 
@@ -111,17 +111,20 @@ Kaarel K and Sander: corrections while orbiting the ball, lining up with the bas
 
 === Week 10 +
 *31.10.2022* +
-Kaur moved from CircuitMaker to Altium Designer and re-designed the PCB there(8h)+
+Kaur moved from CircuitMaker to Altium Designer and re-designed the PCB there(8h) +
+Kaarel K and Sander fixed an issue with basket finding, did testing. (1,5h) +
 
 *01.11.2022* +
 Kaur finished the current PCB design and sent it to revision(4h)+
 
 *03.11.2022* +
 Kaarel made aluminium connectors for wheels (3h) +
+Kaarel K and Sander made some fixes to the electronics to get a task done. (1,5h) +
 
 === Week 11 +
 *07.11.2022* + 
 Kaarel J drilled holes into wheel connectors. (1h) +
+Sander and Kaarel K improved ball searching, started with trying to use depth data from the camera. (2h) +
 
 *09.11.2022* +
 Kaarel J and Kaarel K tried calibrating throwing the ball into the basket. Made lots of throws and wrote down the distances and motor speeds for linear throwing function. +
