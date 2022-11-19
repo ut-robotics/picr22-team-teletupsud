@@ -128,7 +128,7 @@ Sander and Kaarel K improved ball searching, started with trying to use depth da
 Kaur fixed some PCB bugs(2h) +
 
 *09.11.2022* +
-Kaarel J and Kaarel K tried calibrating throwing the ball into the basket. Made lots of throws and wrote down the distances and motor speeds for linear throwing function. +
+Kaarel J and Kaarel K tried calibrating throwing the ball into the basket. Made lots of throws and wrote down the distances and motor speeds for linear throwing function.(4h) +
 
 *13.11.2022* +
 Kaarel J designed the camera mount. (3h) +
@@ -137,6 +137,5 @@ Kaur fixed some PCB bugs(2h)+
 === Week 12 +
 *14.11.2022* +
 Kaur fixed some PCB bugs(2h)+
-
 
 
