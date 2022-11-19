@@ -132,10 +132,10 @@ Kaarel J and Kaarel K tried calibrating throwing the ball into the basket. Made 
 
 *13.11.2022* +
 Kaarel J designed the camera mount. (3h) +
-Kaur fixed some PCB bugs(2h)+ 
+Kaur fixed some PCB bugs(2h) + 
 
 === Week 12 +
 *14.11.2022* +
-Kaur fixed some PCB bugs(2h)+
+Kaur fixed some PCB bugs(2h) +
 
 
