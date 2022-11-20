@@ -137,5 +137,11 @@ Kaur fixed some PCB bugs(2h) +
 === Week 12 +
 *14.11.2022* +
 Kaur fixed some PCB bugs(2h) +
+*18.11.2022* +
+Kaur fixed some PCB bugs(2h) +
+*19.11.2022* +
+Kaur fixed some PCB bugs, design is done(2h) +
+
+=== Week 13 +
 
 
