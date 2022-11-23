@@ -129,7 +129,7 @@ class ImageProcessor():
 
             baskets.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
 
-        baskets.sort(key= lambda x: x.size)
+        baskets.sort(key= lambda x: x.size, reverse=True)
 
         basket = next(iter(baskets), Object(exists = False))
 

@@ -13,6 +13,8 @@ class State(Enum):
     DRIVE_TO_BALL = 2
     FIND_BASKET = 3
     THROW_BALL = 4
+
+
 def translate(value, leftMin, leftMax, rightMin, rightMax):
     # Figure out how 'wide' each range is
     leftSpan = leftMax - leftMin
@@ -23,6 +25,8 @@ def translate(value, leftMin, leftMax, rightMin, rightMax):
 
     # Convert the 0-1 range into a value in the right range.
     return rightMin + (valueScaled * rightSpan)
+
+
 def main_loop():
     debug = False# if set to false wont show camera
     ball_to_right = False
@@ -92,20 +96,21 @@ def main_loop():
                     continue
                 # we check if ball is in middle every 0.5 sec
                 
-                elif time.time() - time_1 >= 0.5: 
+                elif time.time() - time_1 >= 0.8: 
                     current_state = State.DRIVE_TO_BALL
                     continue
 
                 elif processedData.basket_b is not None:
-                    rotation_speed = translate(processedData.basket_b.x, 0, cam.rgb_width, -30, 30)
+                    rotation_speed = translate(processedData.basket_b.x, 0, cam.rgb_width, -50, 50)
                     rotation_speed = -rotation_speed
                     if 1>abs(rotation_speed)>=0:
                         if rotation_speed <= 0:
-                            rotation_speed = -1
+                            rotation_speed = -2
                         if rotation_speed > 0:
-                            rotation_speed = 1
+                            rotation_speed = 2
                     rotation_speed = int(rotation_speed)
                     robot.rotate(rotation_speed)
+                    print(rotation_speed)
                 
                 elif processedData.basket_b is None:
                     time_rotate = time.time()
@@ -141,12 +146,16 @@ def main_loop():
 
             if current_state == State.SEARCH_BALL:
                 time_search = time.time()
-                while time.time() - time_search <= 1:
+                while time.time() - time_search <= 0.6:
                     if ball_to_right:
-                        robot.move(0,0,0.6)
+                        robot.move(0,0,1)
                     else:
-                        robot.move(0,0,-0.6)
-                time.sleep(1)
+                        robot.move(0,0,-1)
+                if ball_to_right:
+                    robot.move(0,0,-0.3)
+                else:
+                    robot.move(0,0,0.3)
+                time.sleep(0.5)
             
             elif current_state == State.DRIVE_TO_BALL:
                 x = processedData.balls[0].x
@@ -157,8 +166,8 @@ def main_loop():
                 if abs(x - cam_center) > center_offset:
                     #print(f"koordinaat : {x}")
                     if y > cam_lower_third:
-                        Rot_constant = 0.1
-                    else: Rot_constant = 0.2
+                        Rot_constant = 0.4
+                    else: Rot_constant = 0.6
                     if x < cam_center - center_offset:
                         ball_to_right = True
                     else: 
@@ -172,7 +181,7 @@ def main_loop():
                         continue
                 #How far away is the ball
                 if y < cam_lower_third:
-                    y_speed = (cam_lower_third - y) * 0.2 / 100
+                    y_speed = (cam_lower_third - y) * 0.3 / 100
                 robot.move(x_speed,y_speed,rot_speed)
 
             frame_cnt +=1
