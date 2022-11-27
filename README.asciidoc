@@ -144,4 +144,10 @@ Kaur fixed some PCB bugs, design is done(2h) +
 
 === Week 13 +
 
+*26.11.2022* + 
+Kaarel J started designing the robot's bottom plate (2,5h)
+
+*27.11.2022* +
+Kaarel J finished designing bottom plate and did some smaller parts for the chassis. (3h)
+
 
