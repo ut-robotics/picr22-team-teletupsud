@@ -137,14 +137,24 @@ Kaur fixed some PCB bugs(2h) +
 === Week 12 +
 *14.11.2022* +
 Kaur fixed some PCB bugs(2h) +
+Sander and Kaarel K - debugging robot getting stuck in a state (2h) +
+*17.11.2022* +
+Sander and Kaarel K - tweaked speeds and ball searching so the robot doesn't get stuck (2h) +
 *18.11.2022* +
 Kaur fixed some PCB bugs(2h) +
 *19.11.2022* +
 Kaur fixed some PCB bugs, design is done(2h) +
 
 === Week 13 +
+*21.11.2022* +
+Kaarel K and Sander - working on referee commands (2h) +
+
 *23.11.2022* +
 Kaur started working on firmware(1h) +
+Sander - working on referee commands (1,5h) +
+
+*24.11.2022* +
+Sander and Kaarel K - finally got the referee system working (2,5h) +
 
 *26.11.2022* + 
 Kaarel J started designing the robot's bottom plate (2,5h)
