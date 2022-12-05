@@ -163,10 +163,21 @@ Kaarel J started designing the robot's bottom plate (2,5h)
 Kaarel J finished designing bottom plate and did some smaller parts for the chassis. (3h)
 
 === Week 14 +
+*29.11.2022* +
+Kaur soldered some components onto the PCB. (2h) +
+
+*30.11.2022* +
+Kaur soldered some components onto the PCB. (2h) +
+
 *01.12.2022* + 
 Kaarel J started designing the top plate for the robot. (2.5h) + 
+Kaur soldered some components onto the PCB. (2h) +
 
 *03.12.2022* +
 Kaarel J finished making the top plate for the robot. (2.5h) +
+Kaur started working on the firmware for the mainboard(2h)+
+
+=== Week 15 +
+
 
 
