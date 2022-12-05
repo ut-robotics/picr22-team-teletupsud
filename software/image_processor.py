@@ -105,7 +105,7 @@ class ImageProcessor():
                     if last_thing - 1 == current_y:
                         last_thing = current_y
                         black +=1
-                        xdd
+                        
                     
                 if color_frame [obj_x] [current_y] == color.white:
                     if last_thing + 1 == current_y:
