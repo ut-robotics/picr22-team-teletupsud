@@ -73,7 +73,7 @@ class ImageProcessor():
     def stop(self):
         self.camera.close()
 
-    def analyze_balls(self, t_balls, fragments) -> list:
+    def analyze_balls(self, color_frame, t_balls, fragments) -> list:
         contours, hierarchy = cv2.findContours(t_balls, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         balls = []
@@ -85,9 +85,9 @@ class ImageProcessor():
 
             size = cv2.contourArea(contour)
 
-            if size < 15:
+            if size < 10:
                 continue
-
+            
             x, y, w, h = cv2.boundingRect(contour)
 
             ys	= np.array(np.arange(y + h, self.camera.rgb_height), dtype=np.uint16)
@@ -96,6 +96,26 @@ class ImageProcessor():
             obj_x = int(x + (w/2))
             obj_y = int(y + (h/2))
             obj_dst = obj_y
+            current_y = obj_y
+            last_thing = current_y
+            black = 0
+            while True:
+                current_y -=1
+                if color_frame [obj_x] [current_y] == color.black:
+                    if last_thing - 1 == current_y:
+                        last_thing = current_y
+                        black +=1
+                    
+                if color_frame [obj_x] [current_y] == color.white:
+                    if last_thing + 1 == current_y:
+                        we_good = True
+                    white +=1
+                    if we_good and white >=10:
+                        we_chilling = True
+                else:
+                    white = 0
+                    black = 0
+
 
             if self.debug:
                 self.debug_frame[ys, xs] = [0, 0, 0]
@@ -160,7 +180,7 @@ class ImageProcessor():
         if self.debug:
             self.debug_frame = np.copy(color_frame)
         
-        balls = self.analyze_balls(self.t_balls, self.fragmented)
+        balls = self.analyze_balls(self.t_balls, color_frame, self.fragmented)
         basket_b = self.analyze_baskets(self.t_basket_b,depth_frame, debug_color=c.Color.BLUE.color.tolist())
         basket_m = self.analyze_baskets(self.t_basket_m,depth_frame, debug_color=c.Color.MAGENTA.color.tolist())
 
