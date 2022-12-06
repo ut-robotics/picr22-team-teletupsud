@@ -73,7 +73,7 @@ class ImageProcessor():
     def stop(self):
         self.camera.close()
 
-    def analyze_balls(self, color_frame, t_balls, fragments) -> list:
+    def analyze_balls(self, t_balls, color_frame, fragments) -> list:
         contours, hierarchy = cv2.findContours(t_balls, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         balls = []
@@ -96,37 +96,12 @@ class ImageProcessor():
             obj_x = int(x + (w/2))
             obj_y = int(y + (h/2))
             obj_dst = obj_y
-            current_y = obj_y
-            last_thing = current_y
-            black = 0
-            while True:
-                current_y -=1
-                if color_frame [obj_x] [current_y] == color.black:
-                    if last_thing - 1 == current_y:
-                        last_thing = current_y
-                        black +=1
-                        
-                    
-                if color_frame [obj_x] [current_y] == color.white:
-                    if last_thing + 1 == current_y:
-                        we_good = True
-                    white +=1
-                    if we_good and white >=10:
-                        we_chilling = True
-                else:
-                    white = 0
-                    black = 0
-
-
             if self.debug:
                 self.debug_frame[ys, xs] = [0, 0, 0]
                 cv2.circle(self.debug_frame,(obj_x, obj_y), 10, (0,255,0), 2)
-
             balls.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
-            
-
         balls.sort(key= lambda x: x.size, reverse=True)
-
+        print(fragments)
         return balls
 
     def analyze_baskets(self, t_basket, depth, debug_color = (0, 255, 255)) -> list:
@@ -157,7 +132,6 @@ class ImageProcessor():
         if self.debug:
             if basket.exists:
                 cv2.circle(self.debug_frame,(basket.x, basket.y), 20, debug_color, -1)
-
         return basket
     def get_depth(self,x,y,depth_frame):
         return depth_frame[y][x]

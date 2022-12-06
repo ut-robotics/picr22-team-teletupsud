@@ -65,6 +65,9 @@ def main_loop():
     basket_offset = 8
     cam_lower_third = cam.rgb_height/3 * 2 + 20
     rotations = 0
+    blue_basket_dist = 4000 
+    magenta_basket_dist = 4000
+    search_trig = False
 
 
     try:
@@ -164,27 +167,38 @@ def main_loop():
 
 
             elif current_state == State.DRIVE_TO_BASKET:
+                if processedData.basket_b.exists:
+                    blue_basket_dist = processedData.basket_b.distance
+                if processedData.basket_m.exists:
+                    magenta_basket_dist = processedData.basket_m.distance
+                print(f"blue_basket_dist = {blue_basket_dist}, mage_basket_dist = {magenta_basket_dist}")
                 if magenta_basket_dist > blue_basket_dist:
                     if processedData.basket_m.exists:
                         y = processedData.basket_m.y
                         x = processedData.basket_m.x
-                        y_speed = (cam_lower_third - y) * 0.3 / 100
-                        rot_speed = (cam_center - x) * Rot_constant / 100
+                        x_speed = 0
+                        y_speed = (cam_lower_third - y) * 0.1 / 100
+                        rot_speed = (cam_center - x) * 0.4 / 100
                         robot.move(x_speed,y_speed,rot_speed)
-                        if processedData.basket_m.distance <= 1700:
+                        if processedData.basket_m.distance <= 2200:
                             current_state = State.SEARCH_BALL
+                            rotations = 0
                         continue
                 elif magenta_basket_dist <= blue_basket_dist:
                     if processedData.basket_b.exists:
                         y = processedData.basket_b.y
                         x = processedData.basket_b.x
-                        y_speed = (cam_lower_third - y) * 0.3 / 100
-                        rot_speed = (cam_center - x) * Rot_constant / 100
+                        x_speed = 0
+                        y_speed = (cam_lower_third) * 0.1 / 100
+                        rot_speed = (cam_center - x) * 0.4 / 100
                         robot.move(x_speed,y_speed,rot_speed)
-                        if processedData.basket_b.distance <= 1700:
+                        if processedData.basket_b.distance <= 2200:
                             current_state = State.SEARCH_BALL
+                            rotations = 0
+                            magenta_basket_dist = 4001
+                            blue_basket_dist = 4000
                         continue
-                robot.move(0,0,1)
+                robot.move(0,0,0.5)
                 
 
             #kui korv on paremal või vasakul ta viskab mööda, alati
@@ -213,11 +227,13 @@ def main_loop():
                 if rotations >= 5:
                     current_state = State.DRIVE_TO_BASKET
                     continue
-
-                if processedData.basket_b.distance < blue_basket_dist:
-                    blue_basket_dist = processedData.basket_b.distance
-                if processedData.basket_m.distance < magenta_basket_dist:
-                    magenta_basket_dist = processedData.basket_m.distance
+                
+                if processedData.basket_b.exists:
+                    if processedData.basket_b.distance < blue_basket_dist:
+                        blue_basket_dist = processedData.basket_b.distance
+                if processedData.basket_m.exists:
+                    if processedData.basket_m.distance < magenta_basket_dist:
+                        magenta_basket_dist = processedData.basket_m.distance
 
                 # TODO replace with just move
                 time_now = time.time()
