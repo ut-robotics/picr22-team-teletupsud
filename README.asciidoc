@@ -179,5 +179,11 @@ Kaur started working on the firmware for the mainboard(2h)+
 
 === Week 15 +
 
+*05.12.2022* +
+Kaarel J 3D printed the wheels and battery holders for the robot. (4h) +
+
+*06.12.2022* +
+Kaarel J fabricated the whole robot and sanded sharp edges. (4h) +
+
 
 
