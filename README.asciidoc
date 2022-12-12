@@ -185,5 +185,8 @@ Kaarel J 3D printed the wheels and battery holders for the robot. (4h) +
 *06.12.2022* +
 Kaarel J fabricated the whole robot and sanded sharp edges. (4h) +
 
+*08.12.2022* +
+Team assembled the whole robot using electronics from the old robot. One motor broke, but we were given another one. (2,5h)
+
 
 
