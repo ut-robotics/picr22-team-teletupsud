@@ -163,6 +163,9 @@ Kaarel J started designing the robot's bottom plate (2,5h)
 Kaarel J finished designing bottom plate and did some smaller parts for the chassis. (3h)
 
 === Week 14 +
+*28.11.2022* +
+Kaarel K and Sander tweaked ball searching (1h) +
+
 *29.11.2022* +
 Kaur soldered some components onto the PCB. (2h) +
 
@@ -172,6 +175,7 @@ Kaur soldered some components onto the PCB. (2h) +
 *01.12.2022* + 
 Kaarel J started designing the top plate for the robot. (2.5h) + 
 Kaur soldered some components onto the PCB. (2h) +
+Sander and Kaarel K resolved a camera issue and also got remote desktop to work (2h) +
 
 *03.12.2022* +
 Kaarel J finished making the top plate for the robot. (2.5h) +
@@ -181,9 +185,13 @@ Kaur started working on the firmware for the mainboard(2h)+
 
 *05.12.2022* +
 Kaarel J 3D printed the wheels and battery holders for the robot. (4h) +
+Kaarel K and Sander improved ball searching, got started with adding logic to check if a ball is outside the court. (2h) +
 
 *06.12.2022* +
 Kaarel J fabricated the whole robot and sanded sharp edges. (4h) +
+
+*07.12.2022* +
+Sander and Kaarel K tested court lines detection and throwing. (2h) +
 
 *08.12.2022* +
 Team assembled the whole robot using electronics from the old robot. One motor broke, but we were given another one. (2,5h)
