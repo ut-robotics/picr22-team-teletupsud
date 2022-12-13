@@ -192,9 +192,18 @@ Kaarel J fabricated the whole robot and sanded sharp edges. (4h) +
 
 *07.12.2022* +
 Sander and Kaarel K tested court lines detection and throwing. (2h) +
+Kaur soldered PCB. (2h) +
 
 *08.12.2022* +
-Team assembled the whole robot using electronics from the old robot. One motor broke, but we were given another one. (2,5h)
+Team assembled the whole robot using electronics from the old robot. One motor broke, but we were given another one. (2,5h) +
+Kaur worked on the firmware and tried to fix the pcb bug(5h)+
 
+=== Week 16+
+
+*12.12.2022* +
+Kaur tried to fix the pcb bug(3h)+
+
+*13.12.2022* +
+Kaur found and fixed the pcb bud(2h)+
 
 
