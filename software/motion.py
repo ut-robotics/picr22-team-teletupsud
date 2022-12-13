@@ -50,14 +50,14 @@ class OmniMotionRobot(IRobotMotion):
             wheelAngularSpeedMainboardUnits.append(int(wheelLinearVelocity))
 
         print(wheelAngularSpeedMainboardUnits) #                                                                                   Thrower_speed/Fail safe
-        bytes_struct = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[1],wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],0,0,0xAAAA)
+        bytes_struct = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],wheelAngularSpeedMainboardUnits[1],0,0,0xAAAA)
         self.serialObj.write(bytes_struct)
 
     def throw(self,thrower_speed):
-        bytes_struct = struct.pack('<hhhHBH', 20, 0, -20, thrower_speed,0,0xAAAA)
+        bytes_struct = struct.pack('<hhhHBH', 0, -20, 20, thrower_speed,0,0xAAAA)
         self.serialObj.write(bytes_struct)
     def rotate(self,rotate_speed):
-        bytes_struct = struct.pack('<hhhHBH', 0, rotate_speed, 0, 0,0,0xAAAA)
+        bytes_struct = struct.pack('<hhhHBH', rotate_speed, 0, 0, 0,0,0xAAAA)
         self.serialObj.write(bytes_struct)
 
     def close(self):

@@ -53,21 +53,22 @@ def main_loop():
         referee.open()
         current_state = State.STOPPED
     else:
-        basket_color = "magenta"
+        basket_color = "blue"
         current_state = State.SEARCH_BALL
 
-    start = time.time()
-    fps = 0
-    frame = 0
-    frame_cnt = 0
+    #start = time.time()
+    #fps = 0
+    #frame = 0
+    #frame_cnt = 0
     cam_center = cam.rgb_width / 2
     center_offset = 20
     basket_offset = 8
     cam_lower_third = cam.rgb_height/3 * 2 + 20
+
     rotations = 0
     blue_basket_dist = 4000 
     magenta_basket_dist = 4000
-    search_trig = False
+    rotation_done = False
 
 
     try:
@@ -90,6 +91,7 @@ def main_loop():
                 continue
 
             processedData = processor.process_frame(aligned_depth=True)
+
             if debug:
                 debug_frame = processedData.debug_frame
 
@@ -158,7 +160,7 @@ def main_loop():
                     print(rotation_speed)
                 
                 elif basket is None:
-                    # TODO try just rotate(20)
+                    # maybe try just rotate(20)
                     time_rotate = time.time()
                     while time.time() - time_rotate < 1:
                         robot.rotate(20)
@@ -180,7 +182,7 @@ def main_loop():
                         y_speed = (cam_lower_third - y) * 0.1 / 100
                         rot_speed = (cam_center - x) * 0.4 / 100
                         robot.move(x_speed,y_speed,rot_speed)
-                        if processedData.basket_m.distance <= 2200:
+                        if processedData.basket_m.distance <= 1700:
                             current_state = State.SEARCH_BALL
                             rotations = 0
                         continue
@@ -210,7 +212,8 @@ def main_loop():
                     continue
                 else:
                     basket_distance = basket.distance
-                    basket_distance = basket_distance * 0.195 + 380
+                    basket_distance = basket_distance * 0.175 + 426
+                    #snax 0.245 0.247 0.234 round(basketDistance*throwerMultiplier + 610) #695 #685 #300 #390
                     print(basket_distance,basket.x)
                     thrower_speed = int(basket_distance)
                     time_1 = time.time()
@@ -235,7 +238,6 @@ def main_loop():
                     if processedData.basket_m.distance < magenta_basket_dist:
                         magenta_basket_dist = processedData.basket_m.distance
 
-                # TODO replace with just move
                 time_now = time.time()
                 our_delay = time_now - int(time_now)
                 if our_delay <= 0.5:
@@ -243,11 +245,10 @@ def main_loop():
                         robot.move(0,0,1)
                     else:
                         robot.move(0,0,-1)
-                    search_trig = True
-                elif search_trig:
-                    search_trig = False
+                    rotation_done = True
+                elif rotation_done:
+                    rotation_done = False
                     rotations += 1
-                    print(rotations)
                     if ball_to_right:
                         robot.move(0,0,-0.1)
                     else:
@@ -282,17 +283,17 @@ def main_loop():
                         continue
                 #How far away is the ball
                 if y < cam_lower_third:
-                    y_speed = (cam_lower_third - y) * 0.3 / 100
+                    y_speed = (cam_lower_third - y) * 0.2 / 100
                 robot.move(x_speed,y_speed,rot_speed)
 
-            frame_cnt +=1
 
-            frame += 1
-            if frame % 30 == 0:
-                frame = 0
-                end = time.time()
-                fps = 30 / (end - start)
-                start = end
+            #frame_cnt +=1
+            #frame += 1
+            #if frame % 30 == 0:
+            #    frame = 0
+            #    end = time.time()
+            #    fps = 30 / (end - start)
+            #    start = end
                 #print("FPS: {}, framecount: {}".format(fps, frame_cnt))
                 #print("ball_count: {}".format(len(processedData.balls)))
                 #if (frame_cnt > 1000):

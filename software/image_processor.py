@@ -73,7 +73,7 @@ class ImageProcessor():
     def stop(self):
         self.camera.close()
 
-    def analyze_balls(self, t_balls, color_frame, fragments) -> list:
+    def analyze_balls(self, t_balls, fragments) -> list:
         contours, hierarchy = cv2.findContours(t_balls, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         balls = []
@@ -96,12 +96,48 @@ class ImageProcessor():
             obj_x = int(x + (w/2))
             obj_y = int(y + (h/2))
             obj_dst = obj_y
-            if self.debug:
-                self.debug_frame[ys, xs] = [0, 0, 0]
-                cv2.circle(self.debug_frame,(obj_x, obj_y), 10, (0,255,0), 2)
-            balls.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
+            current_y = obj_y
+            last_thing = current_y
+            we_are_bing_chilling = False
+            black = white = 0
+            enough_black = False
+            while True:
+                #print(f"DING! black :{black}, white :{white}")
+                #võtame läbi kõik pikslid mis jäävad palli keskpunkti alla
+                current_y +=1
+                if current_y == self.camera.rgb_height:
+                    break
+                #kui leiame musta piksli, siis oleme võibolla leidnud piiri alguse
+                if fragments[current_y][obj_x] == 6:
+                    #print(f"black - {current_y}")
+                    black +=1
+                    if black>=6:
+                        enough_black = True
+                    last_thing = current_y
+                
+                #kui leiame valge piksli oleme võibolla leidnud piiri teise osa
+                elif fragments[current_y][obj_x] == 5:
+                    #print(f"white - {current_y}")
+                    white +=1
+                    if white >=6 and enough_black:
+                        #this means we successfully found the border
+                        we_are_bing_chilling = True
+                        break
+                    last_thing = current_y
+                #kui piksel pole ei must ega valge, siis  lähme tagasi algusesse, resettime koik            
+                ##elif last_thing - current_y >=6:
+                  #  white = 0
+                   # black = 0
+                    #enough_black = False
+            
+            borderheight = black + white
+            #print(f"black : {black}, white : {white}, {current_y},{we_are_bing_chilling}")
+            if not we_are_bing_chilling or obj_y > current_y:
+                if self.debug:
+                    self.debug_frame[ys, xs] = [0, 0, 0]
+                    cv2.circle(self.debug_frame,(obj_x, obj_y), 10, (0,255,0), 2)
+                balls.append(Object(x = obj_x, y = obj_y, size = size, distance = obj_dst, exists = True))
         balls.sort(key= lambda x: x.size, reverse=True)
-        print(fragments)
         return balls
 
     def analyze_baskets(self, t_basket, depth, debug_color = (0, 255, 255)) -> list:
@@ -140,10 +176,10 @@ class ImageProcessor():
         
         if self.camera.has_depth_capability():
             color_frame, depth_frame = self.camera.get_frames(aligned = aligned_depth)
-            return cv2.flip(cv2.flip(color_frame,0),1), cv2.flip(cv2.flip(depth_frame,0),1)
+            return color_frame, depth_frame
         else:
 
-            return cv2.flip(cv2.flip(self.camera.get_color_frame(),0),1), np.zeros((self.camera.rgb_height, self.camera.rgb_width), dtype=np.uint8)
+            return cv2.flip(cv2.flip(self.camera.get_color_frame(),1),1), np.zeros((self.camera.rgb_height, self.camera.rgb_width), dtype=np.uint8)
 
     def process_frame(self, aligned_depth = False) -> ProcessedResults:
         color_frame, depth_frame = self.get_frame_data(aligned_depth = aligned_depth)
@@ -155,7 +191,7 @@ class ImageProcessor():
         if self.debug:
             self.debug_frame = np.copy(color_frame)
         
-        balls = self.analyze_balls(self.t_balls, color_frame, self.fragmented)
+        balls = self.analyze_balls(self.t_balls, self.fragmented)
         basket_b = self.analyze_baskets(self.t_basket_b,depth_frame, debug_color=c.Color.BLUE.color.tolist())
         basket_m = self.analyze_baskets(self.t_basket_m,depth_frame, debug_color=c.Color.MAGENTA.color.tolist())
 

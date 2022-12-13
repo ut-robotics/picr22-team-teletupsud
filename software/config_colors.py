@@ -77,7 +77,6 @@ while(True):
     processedData = processor.process_frame()
 
     rgb = processedData.color_frame
-    rgb = cv2.flip(rgb,0)
     #rgb = cv2.rectangle(rgb,(400,420),(450,480),(125,125,255),-1)
     cv2.imshow('rgb', rgb)
     
