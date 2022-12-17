@@ -85,7 +85,7 @@ class ImageProcessor():
 
             size = cv2.contourArea(contour)
 
-            if size < 10:
+            if size < 15:
                 continue
             
             x, y, w, h = cv2.boundingRect(contour)
@@ -183,7 +183,7 @@ class ImageProcessor():
 
     def process_frame(self, aligned_depth = False) -> ProcessedResults:
         color_frame, depth_frame = self.get_frame_data(aligned_depth = aligned_depth)
-        color_frame = cv2.rectangle(color_frame,(390,420),(450,480),(125,125,255),-1)
+        color_frame = cv2.rectangle(color_frame,(25,420),(800,480),(125,125,255),-1)
         kernel = np.array([[0,1,0],[1,1,1],[0,1,0]],dtype=np.uint8)
         color_frame = cv2.dilate(color_frame, kernel, iterations=1)
         segment.segment(color_frame, self.fragmented, self.t_balls, self.t_basket_m, self.t_basket_b)

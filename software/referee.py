@@ -1,3 +1,5 @@
+# This code is taken from team OWO with permission
+
 import json, time, queue
 import multiprocessing as mp    
 import websocket as wsc

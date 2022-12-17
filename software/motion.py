@@ -45,19 +45,22 @@ class OmniMotionRobot(IRobotMotion):
             wheelLinearVelocity = wheelLinearVelocity * self.wheelSpeedToMainboardUnits
             if -1 < wheelLinearVelocity < 0:
                 wheelLinearVelocity = -1
-            elif 0 < wheelLinearVelocity < 1: 
+            elif 0 <= wheelLinearVelocity < 1: 
                 wheelLinearVelocity = 1
             wheelAngularSpeedMainboardUnits.append(int(wheelLinearVelocity))
 
-        print(wheelAngularSpeedMainboardUnits) #                                                                                   Thrower_speed/Fail safe
-        bytes_struct = struct.pack('<hhhHBH',wheelAngularSpeedMainboardUnits[0],wheelAngularSpeedMainboardUnits[2],wheelAngularSpeedMainboardUnits[1],0,0,0xAAAA)
+        #print(wheelAngularSpeedMainboardUnits) #                                                                                   Thrower_speed/Fail safe
+        bytes_struct = struct.pack('<hhhHH',wheelAngularSpeedMainboardUnits[2],wheelAngularSpeedMainboardUnits[1],wheelAngularSpeedMainboardUnits[0],2500,0xAAAA)
+        #print(wheelAngularSpeedMainboardUnits[2],wheelAngularSpeedMainboardUnits[1])
         self.serialObj.write(bytes_struct)
 
-    def throw(self,thrower_speed):
-        bytes_struct = struct.pack('<hhhHBH', 0, -20, 20, thrower_speed,0,0xAAAA)
+    def throw(self, rotation_speed, thrower_speed):
+        bytes_struct = struct.pack('<hhhHH', -20,20, rotation_speed, thrower_speed,0xAAAA)
+        #print(rotation_speed)
         self.serialObj.write(bytes_struct)
     def rotate(self,rotate_speed):
-        bytes_struct = struct.pack('<hhhHBH', rotate_speed, 0, 0, 0,0,0xAAAA)
+        bytes_struct = struct.pack('<hhhHH',0, 0, rotate_speed, 2500, 0xAAAA)
+        #print(rotate_speed)
         self.serialObj.write(bytes_struct)
 
     def close(self):

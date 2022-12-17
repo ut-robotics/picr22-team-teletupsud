@@ -105,7 +105,7 @@ while(True):
         print('erased')
         colors_lookup[colors_lookup == p]	= 0
 
-# When everything done, release the capture
+# When everything done, release the captureqqq
 
 cap.close()
 
