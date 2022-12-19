@@ -204,6 +204,13 @@ Kaur worked on the firmware and tried to fix the pcb bug(5h)+
 Kaur tried to fix the pcb bug(3h)+
 
 *13.12.2022* +
-Kaur found and fixed the pcb bud(2h)+
+Kaur found and fixed the pcb bug(2h)+
 
+*14.12.2022* +
+Kaur worked on pcb bugs and firmware(13h)+
 
+*15.12.2022* +
+Kaur worked on pcb bugs and firmware(14h)+
+
+*16.12.2022*+
+Kaur worked on pcb bugs and firmware(10h)+
