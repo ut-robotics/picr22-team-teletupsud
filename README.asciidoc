@@ -212,5 +212,6 @@ Kaur worked on pcb bugs and firmware(13h)+
 *15.12.2022* +
 Kaur worked on pcb bugs and firmware(14h)+
 
-*16.12.2022*+
+*16.12.2022* +
 Kaur worked on pcb bugs and firmware(10h)+
+
