@@ -9,7 +9,9 @@ USB is also protected with CM1223-02SO TVS diode package. The motor driver side 
 Motor driver side can be powered with battery power input(16.8V). It also has reverse battery voltage protection installed(BUK6Y10-30P), to avoid reverse voltage damaging the components. 16V has voltage regulator to drop voltage down to 5V.
 Each motor driver has two 3 x 3 mm pads for power outputs.
 
-Motor drivers, that are used, are DRV8243HQRXYRQ1. Because in our setup, DRVOFF is connected to ground, the drivers are always on, but they are sleeping. To wake them up, MCU sends nsleep signals in a small period of time to them. Driver gets two signals, one is PWM and another is direction. The direction signal assigns the direction for the motor. 0 is one way, 1 is another way. Motor drivers can control brushed DC motor, with this PCB board, you can control 3 motors at the same time. These motors need 12V and 5.5A to work properly. However, DRV8243 is capable with 40V and output 12 amps.
+Motor drivers, that are used, are DRV8243HQRXYRQ1. Because in our setup, DRVOFF is connected to ground, the drivers are always on, but they are sleeping. To wake them up, MCU sends nsleep signals in a small period of time to them. Driver gets two signals, one is PWM and another is direction. The direction signal assigns the direction for the motor. 0 is one way, 1 is another way. With this PCB board, you can control 3 DC motors at the same time. 
+Voltage for the motor drivers is limited with capacitors connected to the motor drivers. With our setup, we have the 25V rated capacitors, so 25V is technically the maxium voltage. But we are powering it with 16.8V. 
+The current coming out of motor drivers is limited with resistors, connected to the ITRIP pin and IPROPI pin. In our design, the ITRIP pin is connected to 100k resistor, which sets the ITRIP Voltage to 2.64V. IPROPI is connected with 3.3k resistor, then the current is limited to 2.64 V / 3300 ohm * 3070 = 2.46 A.
 
 
 Connector pinouts:
@@ -26,6 +28,7 @@ One is for + connection and another -
 4. SWCLK
 5. GND
 6. NC
+7. NC
 8. NC
 9. NC
 10. NRST
