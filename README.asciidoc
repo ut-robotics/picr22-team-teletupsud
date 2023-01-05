@@ -8,8 +8,37 @@
 * Sander Soodla  - programmer
 
 == External sources
-Github: https://github.com/ut-robotics/picr22-team-teletupsud +
 Fusion360: https://a360.co/3VIU2DH +
+
+== Programming
+
+== Electronics
+
+Every component that we used were the recommended ones. 
+On the picture, you can see our soldered PCB board, that is working
+image::https://user-images.githubusercontent.com/10268986/210887190-d68e9133-f559-4f0e-b080-dff369ef9009.jpg[Tux,450,450]
+
+The good thing in our electronics is that the board exploded only once. Another thing is that the power connections for the motors didn't need to be kilometre long, they could be quite short. One thing that I was quite annoyed about in the mainboard design, was that I forgot to add special power connections for the thrower motor. Instead I had to solder some janky wires to the pads, that come in from the battery side. If you look at the picture above, the cables were soldered to the right side. Probably I could have designed the board smaller.
+
+
+== Mechanics
+
+== Personal comments
+
+=== Kaur Kullamäe
+
+I worked mainly on the electronics side. I learned quite a lot about the PCB design. For example, when doing the signal tracks, you should give them a little space, so they don't intervere each other. Another thing from design side was that the polygons are life savers. You don't need to do long tracks for 16V or 3.3V, instead you can do a large polygon and connect to it with via-s instead. I also learned from soldering side, that hot air station is quite cool. I learned to solder with it better. But now I hate components that don't have feet on their sides, but instead under them, where you can't really see(DRV8243). I think i spent around 8 hours on soldering and resoldering them to get the perfect seal between component pad and PCb pad. Firmware writing was also quite interesting task and I learned from clock frequency, PID and encoders a lot.
+Next time I would do differently is probably smaller design or a design that is not rectangular. 
+From building a robot I liked a lot the basically 24/7 access to the Digilabor and the stadium. And also that the instructors were very helpful.
+
+Suggestions for next year students: if you get stuck in something, then ask help from instructors. And also try to start working on the schematics and pcb design as soon as possbile. Because reviewing takes some time and deadlines get to you quite fast.
+For instructors: I personally didn't see the point for the excel deadlines stuff 
+
+=== Kaarel Jalakas
+
+=== Kaarel Kõomägi
+
+=== Sander Soodla
 
 == Blog
 === Week 1 +
