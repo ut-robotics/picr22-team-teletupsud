@@ -15,7 +15,8 @@ Fusion360: https://a360.co/3VIU2DH +
 == Electronics
 
 Every component that we used were the recommended ones. 
-On the picture, you can see our soldered PCB board, that is working
+On the picture, you can see our soldered PCB board, that is working +
+
 image::https://user-images.githubusercontent.com/10268986/210887190-d68e9133-f559-4f0e-b080-dff369ef9009.jpg[Tux,450,450]
 
 The good thing in our electronics is that the board exploded only once. Another thing is that the power connections for the motors didn't need to be kilometre long, they could be quite short. One thing that I was quite annoyed about in the mainboard design, was that I forgot to add special power connections for the thrower motor. Instead I had to solder some janky wires to the pads, that come in from the battery side. If you look at the picture above, the cables were soldered to the right side. Probably I could have designed the board smaller.
