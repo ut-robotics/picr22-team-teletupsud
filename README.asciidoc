@@ -9,7 +9,7 @@
 
 == External sources
 Github: https://github.com/ut-robotics/picr22-team-teletupsud +
-Fusion360: https://a360.co/3sZL5JZ
+Fusion360: https://a360.co/3VIU2DH +
 
 == Blog
 === Week 1 +
