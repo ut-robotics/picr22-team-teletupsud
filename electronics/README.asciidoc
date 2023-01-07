@@ -14,14 +14,14 @@ Voltage for the motor drivers is limited with capacitors connected to the motor 
 The current coming out of motor drivers is limited with resistors, connected to the ITRIP pin and IPROPI pin. In our design, the ITRIP pin is connected to 100k resistor, which sets the ITRIP Voltage to 2.64V. IPROPI is connected with 3.3k resistor, then the current is limited to 2.64 V / 3300 ohm * 3070 = 2.46 A.
 
 
-Connector pinouts:
+## Connector pinouts
 
-## Current connection
+### Current connection
 
 One is for + connection and another -
 
 
-## P1 Programmer connector
+### P1 Programmer connector
 1. 3.3V
 2. SWDIO
 3. GND
@@ -30,28 +30,28 @@ One is for + connection and another -
 6. NC
 7. NC
 8. NC
-9. NC
+9. GND
 10. NRST
 
-## J6 Motor 1 Encoder
+### J6 Motor 1 Encoder
 1. GND
 2. 3.3V
 3. M1 ENC 1
 4. M1 ENC 2
 
-## J9 Motor 2 Encoder
+### J9 Motor 2 Encoder
 1. GND
 2. 3.3V
 3. M2 ENC 1
 4. M2 ENC 2
 
-## J12 Motor 3 Encoder
+### J12 Motor 3 Encoder
 1. GND
 2. 3.3V
 3. M3 ENC 1
 4. M3 ENC 2
 
-## J10 Thrower connector
+### J10 Thrower connector
 1. GND
 2. Thrower out
 3. NC
