@@ -1,0 +1,63 @@
+# Teletupsud mainboard and motor drivers
+
+
+The brain of the mainboard is STM32G441KBT6 MCU. You can program it with port on the board using STlink. It's powered with 3.3V. That voltage is achieved from USB-s 5V, which goes through NCP164CSN330T1G to drop voltage from 5V to 3.3V. One LED is connected to one of the MCU-s pins for debugging purposes. There's also a LED for signaling that USB power is on.
+
+
+USB is also protected with CM1223-02SO TVS diode package. The motor driver side and mainboard side are isolated from each other. To get MCU signals from one side to another, it uses MAX14930DASE+ isolators.
+
+Motor driver side can be powered with battery power input(16.8V). It also has reverse battery voltage protection installed(BUK6Y10-30P), to avoid reverse voltage damaging the components. 16V has voltage regulator to drop voltage down to 5V.
+Each motor driver has two 3 x 3 mm pads for power outputs.
+
+Motor drivers, that are used, are DRV8243HQRXYRQ1. Because in our setup, DRVOFF is connected to ground, the drivers are always on, but they are sleeping. To wake them up, MCU sends nsleep signals in a small period of time to them. Driver gets two signals, one is PWM and another is direction. The direction signal assigns the direction for the motor. 0 is one way, 1 is another way. With this PCB board, you can control 3 DC motors at the same time. 
+Voltage for the motor drivers is limited with capacitors connected to the motor drivers. With our setup, we have the 25V rated capacitors, so 25V is technically the maxium voltage. But we are powering it with 16.8V. 
+The current coming out of motor drivers is limited with resistors, connected to the ITRIP pin and IPROPI pin. In our design, the ITRIP pin is connected to 100k resistor, which sets the ITRIP Voltage to 2.64V. IPROPI is connected with 3.3k resistor, then the current is limited to 2.64 V / 3300 ohm * 3070 = 2.46 A.
+
+
+## Connector pinouts
+
+### Current connection
+
+One is for + connection and another -
+
+
+### P1 Programmer connector
+1. 3.3V
+2. SWDIO
+3. GND
+4. SWCLK
+5. GND
+6. NC
+7. NC
+8. NC
+9. GND
+10. NRST
+
+### J6 Motor 1 Encoder
+1. GND
+2. 3.3V
+3. M1 ENC 1
+4. M1 ENC 2
+
+### J9 Motor 2 Encoder
+1. GND
+2. 3.3V
+3. M2 ENC 1
+4. M2 ENC 2
+
+### J12 Motor 3 Encoder
+1. GND
+2. 3.3V
+3. M3 ENC 1
+4. M3 ENC 2
+
+### J10 Thrower connector
+1. GND
+2. Thrower out
+3. NC
+4. NC
+
+
+
+
+
