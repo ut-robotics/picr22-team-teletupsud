@@ -36,6 +36,11 @@ Suggestions for next year students: if you get stuck in something, then ask help
 For instructors: I personally didn't see the point for the excel deadlines stuff 
 
 === Kaarel Jalakas
+Working on the mechanics side was rather fun. I got to use different machines and tools like a lathe, a mill and a 3D printer. I designed the robot in Fusion360.  Getting the hang of Fusion took a bit of time but once I got used to it everything went smoothly.  The most time consuming thing was getting started with whatever task I had at hand but once I started the task I managed to do it in a few days max. Next time I'd try to make the robot a bit more compact. I really liked that we got 24/7 access to Digilabor and we can even do our personal projects there. 
+
+Suggestions for next year students: start designing parts early so you'll have more time to make new iterations. If you get stuck with something or just want another point of view, the instructors or even students from other teams are there to help. 
+
+Suggestions for instructors: keep up the good work. 
 
 === Kaarel Kõomägi
 
