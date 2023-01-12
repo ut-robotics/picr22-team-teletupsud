@@ -12,6 +12,56 @@ Fusion360: https://a360.co/3VIU2DH +
 
 == Programming
 
+=== Libraries used
+
+* numpy - image arrays and array methods
+* opencv-python - image processing and computer vision
+* pyrealsense2 - used for the realsense camera
+* pyserial - serial connection to the mainboard
+* websocket-client - websocket connection for referee commands
+
+=== Logic and structure
+
+Components of the code:
+
+* image processor (image_processor.py)
+
+** Image processor gets data from the camera and finds balls and baskets from it.
+
+* motion calculation (motion.py)
+
+** Calculates motor speeds in mainboard units and sends them to the mainboard.
+
+* referee commands (referee.py)
+
+** Listens for incoming referee commands and allows the main state machine to check if a command has come in.
+
+* main state machine (main.py)
+
+** Based on camera data and referee commands it switches between the following states:
+
+** States
+
+*** Stopped - The robot is stopped and is listening for commands
+
+*** Search_ball - Initial state after getting the start signal. The robot searches for a ball and when one is visible, the robot goes into Drive_to_ball state
+
+*** Drive_to_ball - The robot drives to the largest ball in its view, when the ball is close enough the robot goes into Find_basket state
+
+*** Find_basket - The robot orbits around the ball until it sees the correct basket behind the ball and aligns itself with the basket, then it goes into Throw_ball
+
+*** Throw_ball - Robot throws the ball by spinning the thrower motor based on basket distance and driving forward, after throwing it goes back into Search_ball state
+
+*** Drive_to_basket - If the robot doesn't see any balls around it in the Search_ball state, it enters this state and drives towards the farther basket.
+
+=== Game logic diagram
+
+TODO
+
+=== What was good/bad, how to improve
+
+TODO
+
 == Electronics
 
 Every component that we used were the recommended ones. 
@@ -238,17 +288,19 @@ Kaur worked on the firmware and tried to fix the pcb bug(5h)+
 === Week 16+
 
 *12.12.2022* +
-Kaur tried to fix the pcb bug(3h)+
+Kaur tried to fix the pcb bug(3h) +
 
 *13.12.2022* +
-Kaur found and fixed the pcb bug(2h)+
+Kaur found and fixed the pcb bug(2h) +
 
 *14.12.2022* +
-Kaur worked on pcb bugs and firmware(13h)+
+Kaur worked on pcb bugs and firmware(13h) +
+Sander and Kaarel K tested on the new robot, tweaked throwing, fixed issues from pull request (1.5h) +
 
 *15.12.2022* +
-Kaur worked on pcb bugs and firmware(14h)+
+Kaur worked on pcb bugs and firmware(14h) +
+Kaarel K and Sander made the code work good enough on the new robot, presented tasks (5h) +
 
 *16.12.2022* +
-Kaur worked on pcb bugs and firmware(10h)+
+Kaur worked on pcb bugs and firmware(10h) +
 
