@@ -6,7 +6,7 @@
 
 3. Install the required dependencies using pip:
 ----
-pip3.9 install opencv-python pyrealsense2 numpy
+pip3.9 install opencv-python pyrealsense2 numpy websocket-client pyserial
 ----
 
 Compile the segmentation module as by the instructions below. 
