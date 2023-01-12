@@ -1,0 +1,46 @@
+== Setup
+
+1. Install python 3.9 to your machine
+
+2. Install pip3.9 and distutils for python 3.9:
+
+3. Install the required dependencies using pip:
+----
+pip3.9 install opencv-python pyrealsense2 numpy
+----
+
+Compile the segmentation module as by the instructions below. 
+Remember that you need python dev tools to compile code 
+(python3.9-dev and build-essential)
+
+If you are missing the tkinter module, you can install it with the following command:
+----
+sudo apt-get install python3.9-tk
+----
+
+
+== How to run
+
+Segmentation module installation:
+
+----
+cd segment_module
+pip3.9 install .
+----
+
+Running color configurator:
+
+----
+mkdir colors
+touch colors/colors.pkl
+python3.9 config_colors.py
+----
+
+Running main code:
+
+----
+cd software/
+python3.9 main.py
+----
+
+If you encounter dependency errors, resolve them with pip3.9
