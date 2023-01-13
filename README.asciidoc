@@ -46,7 +46,7 @@ Components of the code:
 
 *** Search_ball - Initial state after getting the start signal. The robot searches for a ball and when one is visible, the robot goes into Drive_to_ball state
 
-*** Drive_to_ball - The robot drives to the largest ball in its view, when the ball is close enough the robot goes into Find_basket state
+*** Drive_to_ball - The robot drives to the largest ball in its view and centers it, when the ball is close enough the robot goes into Find_basket state
 
 *** Find_basket - The robot orbits around the ball until it sees the correct basket behind the ball and aligns itself with the basket, then it goes into Throw_ball
 
@@ -56,7 +56,7 @@ Components of the code:
 
 === Game logic diagram
 
-TODO
+image::https://iili.io/HY1r4zx.png[Game logic diagram]
 
 === What was good/bad, how to improve
 
