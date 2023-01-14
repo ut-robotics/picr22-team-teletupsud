@@ -60,7 +60,9 @@ image::https://iili.io/HY1r4zx.png[Game logic diagram]
 
 === What was good/bad, how to improve
 
-TODO
+The good part is the robot worked well enough to qualify at the course competition and scored some points there.
+
+Detecting if a ball is outside the court limits is not fully implemented. Throwing accuracy could be improved, because the ball and basket line-ups weren't good enough sometimes. The code could also be made a bit more easily understandable.
 
 == Electronics
 
@@ -97,6 +99,12 @@ Suggestions for instructors: keep up the good work.
 === Kaarel Kõomägi
 
 === Sander Soodla
+
+I worked on the programming of our robot. I had some previous experience with lego robots, but it was my first time doing something with robots like this so it was exciting and interesting. I learned how to use openCV as well as state machine logic for the robot and programming a robot with python. One thing I would do differently next time is actually finishing the implementation of detecting if a ball is outside the court lines. Also if I had put in more effort consistently, then our robot could have been more capable. Despite that I still feel I expanded my knowledge about robotics a lot. What I liked about the course is that we got the opportunity to do everything when we wanted to with access to the rooms whenever.
+
+Suggestions for next year students: mess around and find out, if you get stuck ask for help
+
+Suggestions for instructors: keep it up
 
 == Blog
 === Week 1 +
