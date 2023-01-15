@@ -85,6 +85,8 @@ image::https://user-images.githubusercontent.com/92730973/212546834-32ee1da9-994
 
 Wheels: Since I liked the size of the wheels on the test robot, I tried to make new ones around the same size, 65 mm. The wheels were all 3D printed. This was also good because they seemed to be around the perfect size for accurate movements. The wheels were held together with screws and three aluminium connectors, which I made on a lathe, then attached to the motor shaft. I used M4x6 screws to attach the wheels to the motors.
 
+image::https://user-images.githubusercontent.com/92730973/212547360-10febffc-ca68-488d-a0af-46039338a568.jpg[Wheels][width=300px,height=300px]
+
 Thrower: I made a very simple thrower design, which consited of only four parts, two ramp pieces and two side walls. I moved the thrower a bit more towards the centerpoint of the robot which helped get the ball in as straight as possible for accurate throws. Throwing angle was 50 degrees. 
 
 image::https://user-images.githubusercontent.com/92730973/212546837-b959d6cd-86fa-4447-9aab-ac7a17ae7410.jpg[Thrower mechanism][width=300px,height=300px]
