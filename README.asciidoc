@@ -69,9 +69,9 @@ Detecting if a ball is outside the court limits is not fully implemented. Throwi
 Every component that we used were the recommended ones. 
 On the picture, you can see our soldered PCB board, that is working +
 
-image::https://user-images.githubusercontent.com/10268986/210887190-d68e9133-f559-4f0e-b080-dff369ef9009.jpg[Tux,350,450]
-image::https://user-images.githubusercontent.com/10268986/211912282-7a0c361a-5238-48b4-803f-f2a864a53e52.jpg[Tux,350,450]
-image::https://user-images.githubusercontent.com/10268986/211912466-2741fbf3-d83b-47d0-b002-3ab50fb66d89.jpg[Tux,350,450]
+image::https://user-images.githubusercontent.com/10268986/210887190-d68e9133-f559-4f0e-b080-dff369ef9009.jpg[Soldered board]
+image::https://user-images.githubusercontent.com/10268986/211912282-7a0c361a-5238-48b4-803f-f2a864a53e52.jpg[Wired together]
+image::https://user-images.githubusercontent.com/10268986/211912466-2741fbf3-d83b-47d0-b002-3ab50fb66d89.jpg[Connected wires to the board]
 
 The good thing in our electronics is that the board exploded only once. Another thing is that the power connections for the motors didn't need to be kilometre long, they could be quite short. One thing that I was quite annoyed about in the mainboard design, was that I forgot to add special power connections for the thrower motor. Instead I had to solder some janky wires to the pads, that come in from the battery side. If you look at the picture above, the cables were soldered to the right side. Probably I could have designed the board smaller.
 
