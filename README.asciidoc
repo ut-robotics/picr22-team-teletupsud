@@ -311,7 +311,7 @@ Kaur soldered PCB. (2h) +
 Team assembled the whole robot using electronics from the old robot. One motor broke, but we were given another one. (2,5h) +
 Kaur worked on the firmware and tried to fix the pcb bug(5h)+
 
-=== Week 16+
+=== Week 16 +
 
 *12.12.2022* +
 Kaur tried to fix the pcb bug(3h) +
@@ -330,3 +330,5 @@ Kaarel K and Sander made the code work good enough on the new robot, presented t
 *16.12.2022* +
 Kaur worked on pcb bugs and firmware(10h) +
 
+*17.12.2022* +
+Kaur, Kaarel J, Kaarel K, Sander - Delta X competition
