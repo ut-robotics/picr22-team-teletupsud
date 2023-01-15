@@ -78,6 +78,21 @@ The good thing in our electronics is that the board exploded only once. Another 
 
 == Mechanics
 
+While designing the robot I wanted to make sure that there is enough room inside the robot for whatever wires and components were needed. So the distance between bottom and top plate is 40 mm. The diameter of the robot is 310 mm and height is 256 mm. Top and bottom plate were connected to each other using motor mounts a thrower and a camera mount, which let top plate rest on itself. Everything was held together via screws. The assembled robot was sturdy enough to pick up with one hand and connections did not wiggle or anything. I also 3D printed battery holders which were put on the top plate.  +
+
+image::https://user-images.githubusercontent.com/92730973/212544659-b8324a33-febd-49ce-8a81-0212a8a62ca5.jpg[Assembled robot] +
+
+image::https://user-images.githubusercontent.com/92730973/212544721-ea455b72-03da-4265-badc-fc90df3214c9.jpg[Thrower mechanism] +
+
+Wheels: Since I liked the size of the wheels on the test robot, I tried to make new ones around the same size, 65 mm. The wheels were all 3D printed. This was also good because they seemed to be around the perfect size for accurate movements. The wheels were held together with screws and three aluminium connectors, which I made on a lathe, then attached to the motor shaft. I used M4x6 screws to attach the wheels to the motors.
+
+Thrower: I made a very simple thrower design, which consited of only four parts, two ramp pieces and two side walls. I moved the thrower a bit more towards the centerpoint of the robot which helped get the ball in as straight as possible for accurate throws. Throwing angle was 50 degrees. 
+
+The good thing about our robot was that there was enough room for everything. Although if I had to redesign the body, I would try to make it smaller and more compact. Overall I think it was a rather OK design. 
+
+
+
+
 == Personal comments
 
 === Kaur Kullamäe
