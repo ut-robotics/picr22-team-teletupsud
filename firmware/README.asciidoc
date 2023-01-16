@@ -10,6 +10,7 @@ baidid = struct.pack('<hhhHH',speed1, speed2, speed3, thrower_speed,0xAAAA)
 ----
 Where struct.pack packs all values together according to the format give. For our case It's '<hhhHH', where h is int16_t and H uint16_t.
 Speeds 1-3 are values that you want to give the motors. 
+
 * You can't change 0xAAAA
 * Thrower speed values can be from 10 to 7000
 
