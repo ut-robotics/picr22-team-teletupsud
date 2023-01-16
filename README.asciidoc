@@ -104,8 +104,8 @@ I worked mainly on the electronics side. I learned quite a lot about the PCB des
 Next time I would do differently is probably smaller design or a design that is not rectangular. 
 From building a robot I liked a lot the basically 24/7 access to the Digilabor and the stadium. And also that the instructors were very helpful.
 
-Suggestions for next year students: if you get stuck in something, then ask help from instructors. And also try to start working on the schematics and pcb design as soon as possbile. Because reviewing takes some time and deadlines get to you quite fast.
-For instructors: I personally didn't see the point for the excel deadlines stuff 
+Suggestions for next year students: if you get stuck in something, then ask help from instructors. And also try to start working on the schematics and PCB design as soon as possbile. Because reviewing takes some time and deadlines get to you quite fast.
+For instructors: I personally didn't see the point for the excel deadlines stuff and also keep up the good work.
 
 === Kaarel Jalakas
 Working on the mechanics side was rather fun. I got to use different machines and tools like a lathe, a mill and a 3D printer. I designed the robot in Fusion360.  Getting the hang of Fusion took a bit of time but once I got used to it everything went smoothly.  The most time consuming thing was getting started with whatever task I had at hand but once I started the task I managed to do it in a few days max. Next time I'd try to make the robot a bit more compact. I really liked that we got 24/7 access to Digilabor and we can even do our personal projects there. 
@@ -309,26 +309,26 @@ Kaur soldered PCB. (2h) +
 
 *08.12.2022* +
 Team assembled the whole robot using electronics from the old robot. One motor broke, but we were given another one. (2,5h) +
-Kaur worked on the firmware and tried to fix the pcb bug(5h)+
+Kaur worked on the firmware and tried to fix the PCB bug(5h)+
 
 === Week 16 +
 
 *12.12.2022* +
-Kaur tried to fix the pcb bug(3h) +
+Kaur tried to fix the PCB bug(3h) +
 
 *13.12.2022* +
-Kaur found and fixed the pcb bug(2h) +
+Kaur found and fixed the PCB bug(2h) +
 
 *14.12.2022* +
-Kaur worked on pcb bugs and firmware(13h) +
+Kaur worked on PCB bugs and firmware(13h) +
 Sander and Kaarel K tested on the new robot, tweaked throwing, fixed issues from pull request (1.5h) +
 
 *15.12.2022* +
-Kaur worked on pcb bugs and firmware(14h) +
+Kaur worked on PCB bugs and firmware(14h) +
 Kaarel K and Sander made the code work good enough on the new robot, presented tasks (5h) +
 
 *16.12.2022* +
-Kaur worked on pcb bugs and firmware(10h) +
+Kaur worked on PCB bugs and firmware(10h) +
 
 *17.12.2022* +
 Kaur, Kaarel J, Kaarel K, Sander - Delta X competition
