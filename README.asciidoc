@@ -116,6 +116,12 @@ Suggestions for instructors: keep up the good work.
 
 === Kaarel Kõomägi
 
+I worked mostly on the programming of the robot. This was my first time working on a robot that was this complex. I think with a bit of luck and better time management I could have easily gotten more done. A lot of time was spent on troubleshooting. Still it was fun when the robot actually did what I wanted. The best part about this course is the fact that you can work on the project whenever you want because you are given access to the rooms. The course improved my coding skills.
+
+Suggestions for next year students : try and get to a point where the robot is able to do the basics(drive around, get to the ball, aim it, throw it) as soon as possible then start optimizing from there. If you get stuck ask for help.
+
+Suggestions for instructors : the competitions are organized well however I don't see the point in having different deadlines for different tasks.
+
 === Sander Soodla
 
 I worked on the programming of our robot. I had some previous experience with lego robots, but it was my first time doing something with robots like this so it was exciting and interesting. I learned how to use openCV as well as state machine logic for the robot and programming a robot with python. One thing I would do differently next time is actually finishing the implementation of detecting if a ball is outside the court lines. Also if I had put in more effort consistently, then our robot could have been more capable. Despite that I still feel I expanded my knowledge about robotics a lot. What I liked about the course is that we got the opportunity to do everything when we wanted to with access to the rooms whenever.
