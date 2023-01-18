@@ -1,0 +1,74 @@
+This code is based on PICR22 boot camp code https://github.com/ut-robotics/picr22-boot-camp-programming
+
+== Modules in the code
+
+=== Colors.py
+
+Contains data of the colors that are detected. Also contains data used to display the colors in the debug view.
+
+=== camera.py
+
+Contains a ICamera interface that describes methods required by the image processing module. Also contains an example implementation for Intel RealSense cameras (RealsenseCamera) and OpenCV web cameras (OpenCVCamera).
+
+=== image_processor.py
+
+Main module for image processing. Is responsible for image color, feature segmentation, object analysis and filtration. Provides processed frame data.
+
+=== motion.py
+
+Contains OmniMotionRobot class for moving the robot using omnimotion.
+
+=== main.py
+
+Robot mainloop with states. Also contains the Enum for states.
+
+=== config_colors.py
+
+Utility to configure colors. Check log for detailed instructions.
+
+== Setup
+
+1. Install python 3.9 to your machine
+
+2. Install pip3.9 and distutils for python 3.9:
+
+3. Install the required dependencies using pip:
+----
+pip3.9 install opencv-python pyrealsense2 numpy websocket-client pyserial
+----
+
+Compile the segmentation module as by the instructions below. 
+Remember that you need python dev tools to compile code 
+(python3.9-dev and build-essential)
+
+If you are missing the tkinter module, you can install it with the following command:
+----
+sudo apt-get install python3.9-tk
+----
+
+
+== How to run
+
+Segmentation module installation:
+
+----
+cd segment_module
+pip3.9 install .
+----
+
+Running color configurator:
+
+----
+mkdir colors
+touch colors/colors.pkl
+python3.9 config_colors.py
+----
+
+Running main code:
+
+----
+cd software/
+python3.9 main.py
+----
+
+If you encounter dependency errors, resolve them with pip3.9
