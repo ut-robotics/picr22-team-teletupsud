@@ -1,0 +1,30 @@
+= Teletupsud firmware
+
+== Data sent to the mainboard
+
+Because the software uses mainly Python language, the data needs to be converted from python values to C values (bytes).
+It can be done in python with:
+
+----
+baidid = struct.pack('<hhhHH',speed1, speed2, speed3, thrower_speed,0xAAAA)
+----
+Where struct.pack packs all values together according to the format give. For our case It's '<hhhHH', where h is int16_t and H uint16_t.
+Speeds 1-3 are values that you want to give the motors. 
+
+* You can't change 0xAAAA
+* Thrower speed values can be from 10 to 7000
+
+
+== Data recieved from the mainboard
+
+To recieve data from mainboard, you need to read them from serial with:
+----
+recieved = ser.read(size=8)
+----
+And then upack the data with:
+----
+s1, s2, s3, delimiter = struct.unpack('<hhhH', recieved)
+----
+And then you can print the values. Currently, mainboard send back the data of motors 1 and 2 position change and thowers speed. Position change is used for PID, so mainly for debugging purposes
+
+
