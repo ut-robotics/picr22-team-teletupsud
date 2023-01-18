@@ -1,0 +1,340 @@
+= Teletupsud
+ 
+== Team members
+ 
+* Kaur Kullamäe - electronics
+* Kaarel Jalakas - mechanics
+* Kaarel Kõomägi - programmer
+* Sander Soodla  - programmer
+
+== External sources
+Fusion360: https://a360.co/3VIU2DH +
+
+== Programming
+
+=== Libraries used
+
+* numpy - image arrays and array methods
+* opencv-python - image processing and computer vision
+* pyrealsense2 - used for the realsense camera
+* pyserial - serial connection to the mainboard
+* websocket-client - websocket connection for referee commands
+
+=== Logic and structure
+
+Components of the code:
+
+* image processor (image_processor.py)
+
+** Image processor gets data from the camera and finds balls and baskets from it.
+
+* motion calculation (motion.py)
+
+** Calculates motor speeds in mainboard units and sends them to the mainboard.
+
+* referee commands (referee.py)
+
+** Listens for incoming referee commands and allows the main state machine to check if a command has come in.
+
+* main state machine (main.py)
+
+** Based on camera data and referee commands it switches between the following states:
+
+** States
+
+*** Stopped - The robot is stopped and is listening for commands
+
+*** Search_ball - Initial state after getting the start signal. The robot searches for a ball and when one is visible, the robot goes into Drive_to_ball state
+
+*** Drive_to_ball - The robot drives to the largest ball in its view and centers it, when the ball is close enough the robot goes into Find_basket state
+
+*** Find_basket - The robot orbits around the ball until it sees the correct basket behind the ball and aligns itself with the basket, then it goes into Throw_ball
+
+*** Throw_ball - Robot throws the ball by spinning the thrower motor based on basket distance and driving forward, after throwing it goes back into Search_ball state
+
+*** Drive_to_basket - If the robot doesn't see any balls around it in the Search_ball state, it enters this state and drives towards the farther basket.
+
+=== Game logic diagram
+
+image::images/GameLogic.png[Game logic diagram]
+
+=== What was good/bad, how to improve
+
+The good part is the robot worked well enough to qualify at the course competition and scored some points there.
+
+Detecting if a ball is outside the court limits is not fully implemented. Throwing accuracy could be improved, because the ball and basket line-ups weren't good enough sometimes. The code could also be made a bit more easily understandable.
+
+== Electronics
+
+Every component that we used were the recommended ones. 
+On the picture, you can see our soldered PCB board, that is working +
+
+image::images/Soldered_Board.jpg[Soldered board]
+image::images/Electronics.jpg[Wired together]
+image::images/ElectronicsConnectedWires.jpg[Connected wires to the board]
+
+The good thing in our electronics is that the board exploded only once. Another thing is that the power connections for the motors didn't need to be kilometre long, they could be quite short. One thing that I was quite annoyed about in the mainboard design, was that I forgot to add special power connections for the thrower motor. Instead I had to solder some janky wires to the pads, that come in from the battery side. If you look at the picture above, the cables were soldered to the right side. Probably I could have designed the board smaller.
+
+
+== Mechanics
+
+While designing the robot I wanted to make sure that there is enough room inside the robot for whatever wires and components were needed. So the distance between bottom and top plate is 40 mm. The diameter of the robot is 310 mm and height is 256 mm. Top and bottom plate were connected to each other using motor mounts a thrower and a camera mount, which let top plate rest on itself. Everything was held together via screws. The assembled robot was sturdy enough to pick up with one hand and connections did not wiggle or anything. I also 3D printed battery holders which were put on the top plate.  +
+
+
+image::images/MechanicsTogether.jpg[Assembled Robot]
+
+Wheels: Since I liked the size of the wheels on the test robot, I tried to make new ones around the same size, 65 mm. The wheels were all 3D printed. This was also good because they seemed to be around the perfect size for accurate movements. The wheels were held together with screws and three aluminium connectors, which I made on a lathe, then attached to the motor shaft. I used M4x6 screws to attach the wheels to the motors.
+
+image::images/MechanicsWheel.jpg[Wheels]
+
+Thrower: I made a very simple thrower design, which consited of only four parts, two ramp pieces and two side walls. I moved the thrower a bit more towards the centerpoint of the robot which helped get the ball in as straight as possible for accurate throws. Throwing angle was 50 degrees. 
+
+image::images/MechanicsThrower.jpg[Thrower mechanism]
+
+The good thing about our robot was that there was enough room for everything. Although if I had to redesign the body, I would try to make it smaller and more compact. Overall I think it was a rather OK design. 
+
+
+
+
+== Personal comments
+
+=== Kaur Kullamäe
+
+I worked mainly on the electronics side. I learned quite a lot about the PCB design. For example, when doing the signal tracks, you should give them a little space, so they don't intervere each other. Another thing from design side was that the polygons are life savers. You don't need to do long tracks for 16V or 3.3V, instead you can do a large polygon and connect to it with via-s instead. I also learned from soldering side, that hot air station is quite cool. I learned to solder with it better. But now I hate components that don't have feet on their sides, but instead under them, where you can't really see(DRV8243). I think i spent around 8 hours on soldering and resoldering them to get the perfect seal between component pad and PCb pad. Firmware writing was also quite interesting task and I learned from clock frequency, PID and encoders a lot.
+Next time I would do differently is probably smaller design or a design that is not rectangular. 
+From building a robot I liked a lot the basically 24/7 access to the Digilabor and the stadium. And also that the instructors were very helpful.
+
+Suggestions for next year students: if you get stuck in something, then ask help from instructors. And also try to start working on the schematics and PCB design as soon as possbile. Because reviewing takes some time and deadlines get to you quite fast.
+For instructors: I personally didn't see the point for the excel deadlines stuff and also keep up the good work.
+
+=== Kaarel Jalakas
+Working on the mechanics side was rather fun. I got to use different machines and tools like a lathe, a mill and a 3D printer. I designed the robot in Fusion360.  Getting the hang of Fusion took a bit of time but once I got used to it everything went smoothly.  The most time consuming thing was getting started with whatever task I had at hand but once I started the task I managed to do it in a few days max. Next time I'd try to make the robot a bit more compact. I really liked that we got 24/7 access to Digilabor and we can even do our personal projects there. 
+
+Suggestions for next year students: start designing parts early so you'll have more time to make new iterations. If you get stuck with something or just want another point of view, the instructors or even students from other teams are there to help. 
+
+Suggestions for instructors: keep up the good work. 
+
+=== Kaarel Kõomägi
+
+I worked mostly on the programming of the robot. This was my first time working on a robot that was this complex. I think with a bit of luck and better time management I could have easily gotten more done. A lot of time was spent on troubleshooting. Still it was fun when the robot actually did what I wanted. The best part about this course is the fact that you can work on the project whenever you want because you are given access to the rooms. The course improved my coding skills.
+
+Suggestions for next year students : try and get to a point where the robot is able to do the basics(drive around, get to the ball, aim it, throw it) as soon as possible then start optimizing from there. If you get stuck ask for help.
+
+Suggestions for instructors : the competitions are organized well however I don't see the point in having different deadlines for different tasks.
+
+=== Sander Soodla
+
+I worked on the programming of our robot. I had some previous experience with lego robots, but it was my first time doing something with robots like this so it was exciting and interesting. I learned how to use openCV as well as state machine logic for the robot and programming a robot with python. One thing I would do differently next time is actually finishing the implementation of detecting if a ball is outside the court lines. Also if I had put in more effort consistently, then our robot could have been more capable. Despite that I still feel I expanded my knowledge about robotics a lot. What I liked about the course is that we got the opportunity to do everything when we wanted to with access to the rooms whenever.
+
+Suggestions for next year students: mess around and find out, if you get stuck ask for help
+
+Suggestions for instructors: keep it up
+
+== Blog
+=== Week 1 +
+*Bootcamp - 03.04.2022 - 04.04.2022* +
+On Saturday, everybody learned the basics of PICR. That includes programming, mechanics and electronics. That includes soldering wires to the mainboard. Also, 3D designed a small motor holder so that you could connect the motor to the robot's body. Installing Ubuntu on the robot's computer and starting programming. +
+Sunday: teams are formed. Randomly we picked up previous years teams "TLO Rock" box number 1.(8h+8h) +
+
+
+=== Week 2 +
+*05.09.2022* +
+Everybody goes through the safety briefing, so we know how to operate in the lab safely.(60min) +
+*08.09.2022* +
+Programmers start setting up the computer. Because our computer is different from others, It uses mini HDMI for display out. The problem is that the lab has only one mini HDMI -> HDMI cable, and somebody also uses it. Another problem was that in the beginning, we decided not to do a fresh install of Ubuntu on the computer. But it started showing random memory errors, and we decided to reinstall it. That fixed our problem. (1.5h) +
+Kaur and Kaarel decided to set up the test robot of the previous year's team. They ran into trouble when they connected everything up. Found that one of the ground wires was poorly soldered, they re-soldered it.(1.5h) +
+Kaarel started taking dimensions of the robot's body to create the throwing mechanism(30min).
+
+=== Week 3 + 
+*12.09.2022* + 
+Kaarel K and Sander started testing and programming. Trying to find the ball with the camera. Also trying to figure out the driving logic.(1.5h) +
+Kaur started with PCB-s schematic design.(30min) +
+
+*15.09.2022* +
+Kaur completed all necessary wires and connector to connect the battery to the switch and to the robot itselt.(1.5h) +
+Kaarel J is still designing the thrower mechanism and trying to get all the measurements right. (1,5h) +
+Kaarel K and Sander - Omnimotion calculations (2h) +
+
+*18.09.2022* +
+Kaarel J finished designing the thrower mechanism and uploaded it for review. (3h) +
+
+=== Week 4 + 
+*21.09.2022* +
+Kaarel J fixed some issues of the thrower mechanism which were pointed out in the review. (1,5h) +
+
+*22.09.2022* +
+Kaur debugged the voltage regulator not working. Issue was with faulty connectors and connections (30min) +
+Programmers managed to make the robot move in one diretion. (1.5h) +
+All members passed the introduction to battery managment. +
+
+=== Week  5 +
+*28.09.2022* +
+ Kaarel J finished CAM model for milling. (1,5h) +
+ 
+*29.09.2022* +
+Kaarel J made some adjustments for CAM model and milled out thrower parts. (2h) +
+Kaarel K and Sander got the robot to find and follow the ball. (2h) +
+
+*30.09.2022* +
+Kaarel J assembled thrower mechanics and attached to robot. (2h)+
+Kaur basically finished the schematics of the robot(6h) +
+
+=== Week 6 +
+*03.10.2022* +
+Kaarel J started designing omniwheels. (1h) +
+Sander and Kaarel K fixed some issues with code based on feedback. (2h) +
+
+*05.10.2022* +
+Kaur designing the PCB. (2h) +
+
+*06.10.2022* +
+Kaur designing the PCB. (2h) +
+Kaarel K and Sander started implementing state logic and fixed some ball tracking issues. (1,5h) +
+
+
+=== Week 7 +
+*10.10.2022* +
+Sander and Kaarel K finished implementing states. (1h) +
+
+*13.10.2022* +
+Kaarel J working on omniwheel design. (2h) +
+Kaur designing the PCB. (2h) +
+Kaarel K and Sander improved centering of the ball, tried basic throwing. (2h) +
+
+*14.10.2022* +
+Kaur designing the PCB. (2h) +
+
+*16.10.2022* +
+Kaur finished the first version of PCB, sent it to the revision(2h) +
+
+=== Week 8 +
+*17.10.2022* +
+Sander and Kaarel K tried a remote desktop solution, rotating around the ball (1h) +
+
+*20.10.2022* +
+Sander and Kaarel K made a setup so we can run the code on our own laptop, fixed issues from pull request. (1,5h) +
+
+*23.10.2022* +
+Kaarel J working on omniwheels, minor tweaking and testing another design. (1,5h) +
+
+=== Week 9 +
+*24.10.2022* +
+Sander and Kaarel K: basket thresholding, moved throwing logic, masked the motor in the camera view (2h) +
+Kaur fixed some PCB desing bugs (2h) +
+
+*26.10*2022* +
+Kaarel J finished motormount design. (2,5h) +
+
+*27.10.2022* +
+Kaarel K and Sander: corrections while orbiting the ball, lining up with the basket and throwing (2h) +
+
+=== Week 10 +
+*31.10.2022* +
+Kaur moved from CircuitMaker to Altium Designer and re-designed the PCB there(8h) +
+Kaarel K and Sander fixed an issue with basket finding, did testing. (1,5h) +
+
+*01.11.2022* +
+Kaur finished the current PCB design and sent it to revision(4h)+
+
+*03.11.2022* +
+Kaarel made aluminium connectors for wheels (3h) +
+Kaarel K and Sander made some fixes to the electronics to get a task done. (1,5h) +
+
+=== Week 11 +
+*07.11.2022* + 
+Kaarel J drilled holes into wheel connectors. (1h) +
+Sander and Kaarel K improved ball searching, started with trying to use depth data from the camera. (2h) +
+Kaur fixed some PCB bugs(2h) +
+
+*09.11.2022* +
+Kaarel J and Kaarel K tried calibrating throwing the ball into the basket. Made lots of throws and wrote down the distances and motor speeds for linear throwing function.(4h) +
+
+*13.11.2022* +
+Kaarel J designed the camera mount. (3h) +
+Kaur fixed some PCB bugs(2h) + 
+
+=== Week 12 +
+*14.11.2022* +
+Kaur fixed some PCB bugs(2h) +
+Sander and Kaarel K - debugging robot getting stuck in a state (2h) +
+*17.11.2022* +
+Sander and Kaarel K - tweaked speeds and ball searching so the robot doesn't get stuck (2h) +
+*18.11.2022* +
+Kaur fixed some PCB bugs(2h) +
+*19.11.2022* +
+Kaur fixed some PCB bugs, design is done(2h) +
+
+=== Week 13 +
+*21.11.2022* +
+Kaarel K and Sander - working on referee commands (2h) +
+
+*23.11.2022* +
+Kaur started working on firmware(1h) +
+Sander - working on referee commands (1,5h) +
+
+*24.11.2022* +
+Sander and Kaarel K - finally got the referee system working (2,5h) +
+
+*26.11.2022* + 
+Kaarel J started designing the robot's bottom plate (2,5h)
+
+*27.11.2022* +
+Kaarel J finished designing bottom plate and did some smaller parts for the chassis. (3h)
+
+=== Week 14 +
+*28.11.2022* +
+Kaarel K and Sander tweaked ball searching (1h) +
+
+*29.11.2022* +
+Kaur soldered some components onto the PCB. (2h) +
+
+*30.11.2022* +
+Kaur soldered some components onto the PCB. (2h) +
+
+*01.12.2022* + 
+Kaarel J started designing the top plate for the robot. (2.5h) + 
+Kaur soldered some components onto the PCB. (2h) +
+Sander and Kaarel K resolved a camera issue and also got remote desktop to work (2h) +
+
+*03.12.2022* +
+Kaarel J finished making the top plate for the robot. (2.5h) +
+Kaur started working on the firmware for the mainboard(2h)+
+
+=== Week 15 +
+
+*05.12.2022* +
+Kaarel J 3D printed the wheels and battery holders for the robot. (4h) +
+Kaarel K and Sander improved ball searching, got started with adding logic to check if a ball is outside the court. (2h) +
+
+*06.12.2022* +
+Kaarel J fabricated the whole robot and sanded sharp edges. (4h) +
+
+*07.12.2022* +
+Sander and Kaarel K tested court lines detection and throwing. (2h) +
+Kaur soldered PCB. (2h) +
+
+*08.12.2022* +
+Team assembled the whole robot using electronics from the old robot. One motor broke, but we were given another one. (2,5h) +
+Kaur worked on the firmware and tried to fix the PCB bug(5h)+
+
+=== Week 16 +
+
+*12.12.2022* +
+Kaur tried to fix the PCB bug(3h) +
+
+*13.12.2022* +
+Kaur found and fixed the PCB bug(2h) +
+
+*14.12.2022* +
+Kaur worked on PCB bugs and firmware(13h) +
+Sander and Kaarel K tested on the new robot, tweaked throwing, fixed issues from pull request (1.5h) +
+
+*15.12.2022* +
+Kaur worked on PCB bugs and firmware(14h) +
+Kaarel K and Sander made the code work good enough on the new robot, presented tasks (5h) +
+
+*16.12.2022* +
+Kaur worked on PCB bugs and firmware(10h) +
+
+*17.12.2022* +
+Kaur, Kaarel J, Kaarel K, Sander - Delta X competition
